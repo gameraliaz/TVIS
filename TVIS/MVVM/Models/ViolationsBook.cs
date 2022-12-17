@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TVIS.Exceptions;
 using TVIS.MVVM.Model;
 
 namespace TVIS.MVVM.Models
@@ -15,11 +16,20 @@ namespace TVIS.MVVM.Models
         {
             Violations = new();
         }
-        public void AddViolation(Violation violation)
+        public void AddViolation(Violation Violation)
         {
-            Violations.Add(violation);
+            foreach(Violation v in Violations)
+            {
+                if (v.Equals(Violation))
+                    throw new ViolationExsistingException(v, Violation);
+            }
+            Violations.Add(Violation);
         }
 
+        public IEnumerable<Violation> GetViolations()
+        {
+            return Violations;
+        }
         public IEnumerable<Violation> GetViolationsForPerson(Person Person)
         {
             return Violations.Where(v => v.Person.Equals(Person));
@@ -28,7 +38,7 @@ namespace TVIS.MVVM.Models
         {
             return Violations.Where(v => v.Vehicle.Equals(Vehicle));
         }
-        public IEnumerable<Violation> GetViolationsForVehicle(DateTime ViolationDateTime)
+        public IEnumerable<Violation> GetViolationsForViolationDateTime(DateTime ViolationDateTime)
         {
             return Violations.Where(v => v.ViolationDateTime.Equals(ViolationDateTime));
         }
