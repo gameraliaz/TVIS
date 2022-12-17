@@ -9,30 +9,30 @@ namespace TVIS.MVVM.Models
 {
     public class PersonsVehicle
     {
-        public Person Person { get; }
-        public Vehicle Vehicle { get; }
+        public string ID { get; }
+        public string Pelak { get; }
 
-        public PersonsVehicle(Person Person, Vehicle Vehicle)
+        public PersonsVehicle(string Pelak, string ID)
         {
-            this.Person = Person;
-            this.Vehicle = Vehicle;
+            this.Pelak = Pelak;
+            this.ID = ID;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is PersonsVehicle vehicle &&
-                   EqualityComparer<Person>.Default.Equals(Person, vehicle.Person) &&
-                   EqualityComparer<Vehicle>.Default.Equals(Vehicle, vehicle.Vehicle);
+            return obj is PersonsVehicle personsvehicle &&
+                   EqualityComparer<string>.Default.Equals(ID, personsvehicle.ID) &&
+                   EqualityComparer<string>.Default.Equals(Pelak, personsvehicle.Pelak);
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Person, Vehicle);
+            return HashCode.Combine(ID, Pelak);
         }
 
         public override string? ToString()
         {
-            return $"{Person},{Vehicle}";
+            return $"{ID},{Pelak}";
         }
     }
 }
