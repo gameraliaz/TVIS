@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TVIS.MVVM.View
+namespace TVIS
 {
     /// <summary>
-    /// Interaction logic for Main.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Main : Window
+    public partial class MainWindow : Window
     {
-        public Main()
+        public MainWindow()
         {
             InitializeComponent();
         }

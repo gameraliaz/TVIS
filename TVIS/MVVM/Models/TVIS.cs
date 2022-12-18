@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TVIS.Exceptions;
 using TVIS.MVVM.Models;
 
-namespace TVIS.MVVM.Model
+namespace TVIS.MVVM.Models
 {
     public class TVIS
     {

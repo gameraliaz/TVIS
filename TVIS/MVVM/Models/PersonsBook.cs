@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TVIS.Exceptions;
-using TVIS.MVVM.Model;
 
 namespace TVIS.MVVM.Models
 {

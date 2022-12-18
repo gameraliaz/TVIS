@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using TVIS.MVVM.View;
-
-namespace TVIS.MVVM.Model
+namespace TVIS.MVVM.Models
 {
     public enum VehiclesType
     {

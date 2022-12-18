@@ -1,12 +1,12 @@
-﻿<Window x:Class="TVIS.MVVM.View.Main"
+﻿<Window x:Class="TVIS.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TVIS.MVVM.View"
+        xmlns:local="clr-namespace:TVIS" xmlns:views="clr-namespace:TVIS.MVVM.Views"
         mc:Ignorable="d"
-        Title="Main" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <views:MainMenu/>
     </Grid>
 </Window>

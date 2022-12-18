@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace TVIS.MVVM.Model
+namespace TVIS.MVVM.Models
 {
     public class Person
     {

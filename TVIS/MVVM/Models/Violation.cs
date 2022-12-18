@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TVIS.MVVM.Model
+namespace TVIS.MVVM.Models
 {
     public enum ViolationsType
     {
