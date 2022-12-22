@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="TVIS.MVVM.Views.WinTool"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TVIS.MVVM.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="34" d:DesignWidth="102">
+    <StackPanel x:Name="Tools" Orientation="Horizontal" >
+
+        <materialDesign:PackIcon x:Name="MinimizeIco" 
+                                 Width="30" Height="30" 
+                                 Kind="WindowMinimize" 
+                                 Margin="2" 
+                                 MouseUp="MinimizeWindow"/>
+        <materialDesign:PackIcon x:Name="MaximizeIco" 
+                                 Width="30" Height="30" 
+                                 Kind="WindowMaximize" 
+                                 Margin="2" 
+                                 MouseUp="MaximizeWindow"/>
+        <materialDesign:PackIcon x:Name="CloseIco" 
+                                 Width="30" Height="30" 
+                                 Kind="WindowClose" 
+                                 Margin="2" 
+                                 MouseUp="CloseWindow"/>
+    </StackPanel>
+</UserControl>
