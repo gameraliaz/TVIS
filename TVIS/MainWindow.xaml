@@ -7,8 +7,61 @@
         mc:Ignorable="d"
         Title="TVIS" Height="800" Width="1200" WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize" Background="Transparent"
-        AllowsTransparency="True" WindowStyle="None">
-    <Grid>
-        <views:MainMenu/>
-    </Grid>
+        AllowsTransparency="True" WindowStyle="None" x:Name="MainWinD">
+    <Window.Resources>
+        <Storyboard x:Key="Colapsing">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1.157"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-78.4"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Expanding">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.154"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-75.8"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <DockPanel>
+        <views:LeftMenuBar DockPanel.Dock="Left" x:Name="Lmenu" 
+                           MouseDownMenuColapsing="Colapsingmenu" MouseDownMenuExpanding="Expandingmenu" 
+                           MouseDownDashboard="Lmenu_MouseDownDashboard" MouseDownInsertion="Lmenu_MouseDownInsertion"
+                           MouseDownModify="Lmenu_MouseDownModify" MouseDownDeletetion="Lmenu_MouseDownDeletetion"
+                           MouseDownInfo="Lmenu_MouseDownInfo" MouseDownExit="Lmenu_MouseDownExit"/>
+        <Border MouseDown="border_MouseDown" CornerRadius="50" x:Name="border" Background="#131F3A" DockPanel.Dock="Top" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <!--PagesHere-->
+                
+            </Grid>
+        </Border>
+
+
+
+    </DockPanel>
 </Window>

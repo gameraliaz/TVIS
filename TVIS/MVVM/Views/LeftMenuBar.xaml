@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:TVIS.MVVM.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  x:Class="TVIS.MVVM.Views.LeftMenuBar"
              mc:Ignorable="d" 
-            x:Name="SidebarMenu"
              d:DesignHeight="800" d:DesignWidth="200">
     <UserControl.Resources>
         <Storyboard x:Key="StoryboardClosingmenu">

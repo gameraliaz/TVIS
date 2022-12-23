@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TVIS.MVVM.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1200" >
+             d:DesignHeight="800" d:DesignWidth="1200">
     <UserControl.Resources>
         <Storyboard x:Key="Colapsing">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
@@ -29,7 +29,6 @@
         </Storyboard>
     </UserControl.Resources>
     <DockPanel>
-
         <local:LeftMenuBar DockPanel.Dock="Left" x:Name="Lmenu" 
                            MouseDownMenuColapsing="Colapsingmenu" MouseDownMenuExpanding="Expandingmenu" 
                            MouseDownDashboard="Lmenu_MouseDownDashboard" MouseDownInsertion="Lmenu_MouseDownInsertion"
