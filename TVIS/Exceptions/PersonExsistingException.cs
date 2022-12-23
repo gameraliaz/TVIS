@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using TVIS.MVVM.Models;
 
 namespace TVIS.Exceptions
 {
-    public class PersonExsistingException:Exception
+    public class PersonExsistingException : Exception
     {
         public Person ExistingPerson { get; }
         public Person IncomingPerson { get; }

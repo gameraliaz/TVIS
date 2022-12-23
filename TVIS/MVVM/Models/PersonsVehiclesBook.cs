@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TVIS.Exceptions;
 
 namespace TVIS.MVVM.Models
@@ -31,7 +28,7 @@ namespace TVIS.MVVM.Models
         }
         public IEnumerable<PersonsVehicle> GetPersonsVehiclesForPerson(Person Person)
         {
-            return PersonsVehicles.Where(pv=>pv.Person.Equals(Person));
+            return PersonsVehicles.Where(pv => pv.Person.Equals(Person));
         }
         public IEnumerable<PersonsVehicle> GetPersonsVehiclesForVehicle(Vehicle Vehicle)
         {

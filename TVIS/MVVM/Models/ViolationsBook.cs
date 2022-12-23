@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TVIS.Exceptions;
 
 namespace TVIS.MVVM.Models
@@ -17,7 +15,7 @@ namespace TVIS.MVVM.Models
         }
         public void AddViolation(Violation Violation)
         {
-            foreach(Violation v in Violations)
+            foreach (Violation v in Violations)
             {
                 if (v.Equals(Violation))
                     throw new ViolationExsistingException(v, Violation);

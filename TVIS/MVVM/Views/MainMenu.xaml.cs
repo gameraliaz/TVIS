@@ -1,19 +1,7 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TVIS.MVVM.Views
 {
@@ -41,6 +29,37 @@ namespace TVIS.MVVM.Views
         {
             var myWindow = Window.GetWindow(this);
             myWindow.DragMove();
+        }
+
+        private void Lmenu_MouseDownDashboard(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Lmenu_MouseDownInsertion(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Lmenu_MouseDownModify(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Lmenu_MouseDownDeletetion(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Lmenu_MouseDownInfo(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Lmenu_MouseDownExit(object sender, RoutedEventArgs e)
+        {
+            var myWindow = Window.GetWindow(this);
+            myWindow.Close();
         }
     }
 }

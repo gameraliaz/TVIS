@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace TVIS.MVVM.Models
 {
@@ -13,8 +9,8 @@ namespace TVIS.MVVM.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public byte[]? Image { get; set; }
-        public Person(string ID) 
-        { 
+        public Person(string ID)
+        {
             this.ID = ID;
             if (!Regex.IsMatch(ID, "[1-9][0-9]{9}"))
             {

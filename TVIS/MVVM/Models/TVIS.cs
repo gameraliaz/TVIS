@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TVIS.Exceptions;
-using TVIS.MVVM.Models;
 
 namespace TVIS.MVVM.Models
 {
@@ -22,7 +17,7 @@ namespace TVIS.MVVM.Models
             PersonsVehiclesBook = new();
         }
 
-        public void MakeViolation(Violation violation) 
+        public void MakeViolation(Violation violation)
         {
             ViolationsBook.AddViolation(violation);
         }
@@ -56,7 +51,7 @@ namespace TVIS.MVVM.Models
         }
         public void MakeVehicle(Vehicle vehicle)
         {
-           VehiclesBook.AddVehicles(vehicle);
+            VehiclesBook.AddVehicles(vehicle);
         }
         public IEnumerable<Vehicle> GetVehicles()
         {

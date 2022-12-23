@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 namespace TVIS.MVVM.Models
 {
     public enum VehiclesType
@@ -27,7 +23,7 @@ namespace TVIS.MVVM.Models
             {
                 int MIN = 1350;
                 int MAX = DateTime.Now.Year;
-                if ((MIN > value || value > MAX ) && value is not null)
+                if ((MIN > value || value > MAX) && value is not null)
                 {
                     var message = string.Format("Year must be between {0} and {1}.", MIN, MAX);
                     throw new ArgumentOutOfRangeException("year", value, message);
