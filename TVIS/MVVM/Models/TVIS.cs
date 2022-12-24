@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace TVIS.MVVM.Models
 {
-    public class TVIS
+    public class TVISModel
     {
         private readonly ViolationsBook ViolationsBook;
         private readonly PersonsBook PersonsBook;
         private readonly VehiclesBook VehiclesBook;
         private readonly PersonsVehiclesBook PersonsVehiclesBook;
-        public TVIS()
+        public TVISModel()
         {
             ViolationsBook = new();
             PersonsBook = new();

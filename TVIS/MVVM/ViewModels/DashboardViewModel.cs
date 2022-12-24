@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using TVIS.Commands;
 using TVIS.MVVM.Models;
 
 namespace TVIS.MVVM.ViewModels
 {
-    public class DashboardViewModel:ViewModelBase
+    public class DashboardViewModel : ViewModelBase
     {
         private int _SumOfCost;
         public string SumOfCost
@@ -27,57 +28,57 @@ namespace TVIS.MVVM.ViewModels
             }
         }
         private int _CountOfPersons;
-		public string CountOfPersons
-		{
-			get
-			{
-				return _CountOfPersons.ToString();
-			}
-			set
-			{
-				_CountOfPersons = Convert.ToInt32(value);
-				OnPropertyChanged(nameof(CountOfPersons));
-			}
-		}
-		private int _CountOfVehicles;
-		public string CountOfVehicles
-		{
-			get
-			{
-				return _CountOfVehicles.ToString(); 
-			}
-			set
-			{
-				_CountOfVehicles = Convert.ToInt32(value);
+        public string CountOfPersons
+        {
+            get
+            {
+                return _CountOfPersons.ToString();
+            }
+            set
+            {
+                _CountOfPersons = Convert.ToInt32(value);
+                OnPropertyChanged(nameof(CountOfPersons));
+            }
+        }
+        private int _CountOfVehicles;
+        public string CountOfVehicles
+        {
+            get
+            {
+                return _CountOfVehicles.ToString();
+            }
+            set
+            {
+                _CountOfVehicles = Convert.ToInt32(value);
                 OnPropertyChanged(nameof(CountOfVehicles));
-			}
-		}
-		private int _CountOfViolations;
-		public string CountOfViolations
-		{
-			get
-			{
-				return _CountOfViolations.ToString(); ;
-			}
-			set
-			{
-				_CountOfViolations = Convert.ToInt32(value);
+            }
+        }
+        private int _CountOfViolations;
+        public string CountOfViolations
+        {
+            get
+            {
+                return _CountOfViolations.ToString(); ;
+            }
+            set
+            {
+                _CountOfViolations = Convert.ToInt32(value);
                 OnPropertyChanged(nameof(CountOfViolations));
-			}
-		}
-		private int _CountOfPersonsVehicles;
-		public string CountOfPersonsVehicles
-		{
-			get
-			{
-				return _CountOfPersonsVehicles.ToString();
-			}
-			set
-			{
-				_CountOfPersonsVehicles = Convert.ToInt32(value);
+            }
+        }
+        private int _CountOfPersonsVehicles;
+        public string CountOfPersonsVehicles
+        {
+            get
+            {
+                return _CountOfPersonsVehicles.ToString();
+            }
+            set
+            {
+                _CountOfPersonsVehicles = Convert.ToInt32(value);
                 OnPropertyChanged(nameof(CountOfPersonsVehicles));
-			}
-		}
+            }
+        }
         private string _PVID;
         public string PVID
         {
@@ -157,6 +158,8 @@ namespace TVIS.MVVM.ViewModels
             }
         }
         private string _SelectedTableName;
+        private IEnumerable<TableViewModel> table;
+
         public string SelectedTableName
         {
             get
@@ -170,18 +173,32 @@ namespace TVIS.MVVM.ViewModels
             }
         }
         //private readonly ObservableCollection<TableViewModel> _Table;
-        public IEnumerable<TableViewModel> Table { get; set; }
+        public IEnumerable<TableViewModel> Table { 
+            get 
+            {
+                return table;
+            }
+            set 
+            {
+                table = value;
+                OnPropertyChanged(nameof(Table));
+            } 
+        }
         private readonly ObservableCollection<PersonViewModel> _Persons;
+        public IEnumerable<PersonViewModel> Persons => _Persons;
         private readonly ObservableCollection<VehicleViewModel> _Vehicles;
+        public IEnumerable<VehicleViewModel> Vehicles => _Vehicles;
         private readonly ObservableCollection<ViolationViewModel> _Violations;
+        public IEnumerable<ViolationViewModel> Violations => _Violations;
         private readonly ObservableCollection<PersonsVehicleViewModel> _PersonsVehicles;
+        public IEnumerable<PersonsVehicleViewModel> PersonsVehicles => _PersonsVehicles;
         public ICommand ShowPersons { get; }
-		public ICommand ShowVehicles { get; }
-		public ICommand ShowViolations { get; }
-		public ICommand ShowPersonsVehicle { get; }
-		public ICommand ShowPersonViolations { get; }
-		public ICommand ShowPersonViolationsDate { get; }
-		public ICommand ShowVehicleViolations { get; }
+        public ICommand ShowVehicles { get; }
+        public ICommand ShowViolations { get; }
+        public ICommand ShowPersonsVehicles { get; }
+        public ICommand ShowPersonViolations { get; }
+        public ICommand ShowPersonViolationsDate { get; }
+        public ICommand ShowVehicleViolations { get; }
 
 
         public DashboardViewModel()
@@ -197,8 +214,11 @@ namespace TVIS.MVVM.ViewModels
             _Vehicles = new();
             _Violations = new();
             _PersonsVehicles = new();
-            Table = _Persons;
-
+            Table = Persons;
+            ShowPersons = new ShowPersonsCommand(this);
+            ShowVehicles = new ShowVehiclesCommand(this);
+            ShowViolations = new ShowViolationsCommand(this);
+            ShowPersonsVehicles = new ShowPersonsVehiclesCommand(this);
         }
     }
 }

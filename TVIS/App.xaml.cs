@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TVIS.MVVM.Models;
 using TVIS.MVVM.ViewModels;
 
 namespace TVIS
@@ -8,6 +9,13 @@ namespace TVIS
     /// </summary>
     public partial class App : Application
     {
+        private readonly TVISModel tvis;
+
+        public App()
+        {
+            tvis = new();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new MainWindow()

@@ -29,28 +29,28 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1">
                 <StackPanel Orientation="Horizontal" Margin="0 25 10 0">
-                    <Button Command="{Binding ShowPersons}" Height="36" BorderThickness="0" Background="Transparent" Margin="0 0 18 0" >
+                    <Button Cursor="Hand" Command="{Binding ShowPersons}" Height="36" BorderThickness="0" Background="Transparent" Margin="0 0 18 0" >
                         <materialDesign:PackIcon  Width="28" Height="28" Foreground="#EFEFFD" VerticalAlignment="Center" Kind="Table"/>
                     </Button>
                     <TextBlock Text="Count of Persons" Foreground="#EFEFFD" FontSize="28" />
                     <TextBlock Margin="20 0 0 0" Text="{Binding CountOfPersons, UpdateSourceTrigger=PropertyChanged}" Foreground="#EFEFFD" FontSize="28" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 25 10 0">
-                    <Button Command="{Binding ShowVehicles}" Height="36" BorderThickness="0" Background="Transparent" Margin="0 0 18 0" >
+                    <Button  Cursor="Hand" Command="{Binding ShowVehicles}" Height="36" BorderThickness="0" Background="Transparent" Margin="0 0 18 0" >
                         <materialDesign:PackIcon Width="28" Height="28" Foreground="#EFEFFD" VerticalAlignment="Center" Kind="Table"/>
                     </Button>
                     <TextBlock Text="Count of Vehicles" Foreground="#EFEFFD" FontSize="28" />
                     <TextBlock Margin="20 0 0 0" Text="{Binding CountOfVehicles, UpdateSourceTrigger=PropertyChanged}" Foreground="#EFEFFD" FontSize="28" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 25 10 0">
-                    <Button Command="{Binding ShowViolations}" Height="36" BorderThickness="0" Background="Transparent" Margin="0 0 18 0" >
+                    <Button  Cursor="Hand" Command="{Binding ShowViolations}" Height="36" BorderThickness="0" Background="Transparent" Margin="0 0 18 0" >
                         <materialDesign:PackIcon Width="28" Height="28" Foreground="#EFEFFD" VerticalAlignment="Center" Kind="Table"/>
                     </Button>
                     <TextBlock Text="Count of Violations" Foreground="#EFEFFD" FontSize="28" />
                     <TextBlock Margin="20 0 0 0" Text="{Binding CountOfViolations, UpdateSourceTrigger=PropertyChanged}" Foreground="#EFEFFD" FontSize="28" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 25 10 0">
-                    <Button Command="{Binding ShowPersonsVehicle}" Height="36" BorderThickness="0" Background="Transparent" Margin="0 0 18 0" >
+                    <Button Cursor="Hand" Command="{Binding ShowPersonsVehicles}" Height="36" BorderThickness="0" Background="Transparent" Margin="0 0 18 0" >
                         <materialDesign:PackIcon Width="28" Height="28" Foreground="#EFEFFD" VerticalAlignment="Center" Kind="Table"/>
                     </Button>
                     <TextBlock Text="Count of Person's Vehicles" Foreground="#EFEFFD" FontSize="28" />
@@ -81,18 +81,18 @@
         </Grid>
         <StackPanel Grid.Row="3" Orientation="Vertical">
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <Button Command="{Binding ShowPersonViolations}" Height="36" BorderThickness="0" Background="Transparent" Margin="10 0 18 0" >
+                <Button Cursor="Hand" Command="{Binding ShowPersonViolations}" Height="36" BorderThickness="0" Background="Transparent" Margin="10 0 18 0" >
                     <materialDesign:PackIcon Width="36" Height="36" Foreground="#EFEFFD" VerticalAlignment="Center" Kind="Table"/>
                 </Button>
                 <TextBox Text="{Binding PVID, UpdateSourceTrigger=PropertyChanged}" TabIndex="0" Margin="5 25 10 25"  Width="218"  FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
-                <Button Command="{Binding ShowVehicleViolations}" Height="36" BorderThickness="0" Background="Transparent" Margin="10 0 18 0" >
+                <Button Cursor="Hand" Command="{Binding ShowVehicleViolations}" Height="36" BorderThickness="0" Background="Transparent" Margin="10 0 18 0" >
                     <materialDesign:PackIcon Width="36" Height="36" Foreground="#EFEFFD" VerticalAlignment="Center" Kind="Table"/>
                 </Button>
                 <TextBox Text="{Binding VVPelak, UpdateSourceTrigger=PropertyChanged}" TabIndex="1" Margin="5 25 10 25"  Width="218"  FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <Image Width="120" Height="120" Margin="10 0 18 0" Source="{Binding imgVVPelak}"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <Button Command="{Binding ShowPersonViolationsDate}" Height="36" BorderThickness="0" Background="Transparent" Margin="10 0 18 0" >
+                <Button Cursor="Hand" Command="{Binding ShowPersonViolationsDate}" Height="36" BorderThickness="0" Background="Transparent" Margin="10 0 18 0" >
                     <materialDesign:PackIcon Width="36" Height="36" Foreground="#EFEFFD" VerticalAlignment="Center" Kind="Table"/>
                 </Button>
                 <TextBox Text="{Binding PVDID, UpdateSourceTrigger=PropertyChanged}" TabIndex="3" Margin="5 25 10 25"  Width="218"  FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
