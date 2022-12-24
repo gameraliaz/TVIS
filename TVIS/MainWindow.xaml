@@ -57,7 +57,7 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <!--PagesHere-->
-                <views:Dashboard Grid.Row="1" Grid.Column="1"/>
+                <views:Dashboard Grid.Row="1" Grid.Column="1" DataContext="{Binding CurentViewModel}"/>
             </Grid>
         </Border>
 

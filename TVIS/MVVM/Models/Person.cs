@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Windows.Media.Imaging;
 
 namespace TVIS.MVVM.Models
 {
@@ -8,7 +9,7 @@ namespace TVIS.MVVM.Models
         public string ID { get; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public byte[]? Image { get; set; }
+        public BitmapSource? Image { get; set; }
         public Person(string ID)
         {
             this.ID = ID;

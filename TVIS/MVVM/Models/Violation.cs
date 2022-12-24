@@ -5,7 +5,7 @@ namespace TVIS.MVVM.Models
 {
     public enum ViolationsType
     {
-        overtaking = 1,
+        Overtaking = 1,
         Speed = 2,
         Belt = 3,
     }

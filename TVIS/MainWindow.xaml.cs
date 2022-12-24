@@ -31,7 +31,9 @@ namespace TVIS
         private void border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var myWindow = Window.GetWindow(this);
-            myWindow.DragMove();
+            try
+            { myWindow.DragMove(); }
+            catch { }
         }
 
         private void Lmenu_MouseDownDashboard(object sender, RoutedEventArgs e)

@@ -36,18 +36,20 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Persons" FontSize="28" Foreground="#EFEFFD"/>
-                <TextBox TabIndex="0" Margin="10" Grid.Row="1" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <TextBox Text="{Binding PersonID, UpdateSourceTrigger=PropertyChanged}" TabIndex="0" Margin="10" Grid.Row="1" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="1" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="ID : "/>
-                <TextBox TabIndex="1" Margin="10" Grid.Row="2" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <TextBox Text="{Binding PersonFirstName, UpdateSourceTrigger=PropertyChanged}" TabIndex="1" Margin="10" Grid.Row="2" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="2" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="Firstname : "/>
-                <TextBox TabIndex="2" Margin="10" Grid.Row="3" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <TextBox Text="{Binding PersonLastName, UpdateSourceTrigger=PropertyChanged}" TabIndex="2" Margin="10" Grid.Row="3" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="3" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="Lastname : "/>
-                <Border  Cursor="Hand" Margin="0 20 0 0" Grid.Row="4" CornerRadius="22" Background="LightBlue" Width="300" Height="45">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <materialDesign:PackIcon Width="30" Height="30" Kind="ImageAdd" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 10 0"/>
-                        <TextBlock FontSize="24"  Text="Select picture" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 0"/>
-                    </StackPanel>
-                </Border>
+                <Button Command="{Binding SelectImg}" Background="Transparent"  BorderThickness="0" Cursor="Hand" Margin="0 20 0 0" Grid.Row="4" Width="300" Height="45">
+                    <Border   CornerRadius="22" Background="LightBlue" Width="300" Height="45">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <materialDesign:PackIcon Width="30" Height="30" Kind="ImageAdd" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 10 0"/>
+                            <TextBlock FontSize="24"  Text="Select picture" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 0"/>
+                        </StackPanel>
+                    </Border>
+                </Button>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -58,25 +60,15 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Vehicle" FontSize="28" Foreground="#EFEFFD"/>
-                <TextBox TabIndex="3" Margin="10" Grid.Row="1" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <TextBox Text="{Binding VehiclePelak, UpdateSourceTrigger=PropertyChanged}" TabIndex="3" Margin="10" Grid.Row="1" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="1" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="Pelak : "/>
-                <ComboBox TabIndex="4" Margin="10" Grid.Row="2" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <ComboBox SelectedIndex="{Binding VehicleType, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" TabIndex="4" Margin="10" Grid.Row="2" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1"  >
+                    <ComboBoxItem  IsSelected="True">Car</ComboBoxItem>
+                    <ComboBoxItem>Truck</ComboBoxItem>
+                    <ComboBoxItem>Motorcycle</ComboBoxItem>
+                </ComboBox>
                 <TextBlock Margin="10" Grid.Row="2" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="Type : "/>
-                <DatePicker TabIndex="5" HorizontalContentAlignment="Stretch" Margin="10" Grid.Row="3" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD">
-                    <DatePicker.Resources>
-                        <Style TargetType="DatePickerTextBox">
-                            <Setter Property="Control.Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <TextBox TextAlignment="Center" x:Name="PART_TextBox"
-                                     Text="{Binding Path=SelectedDate, StringFormat = {}{0:yyyy}, 
-                                     RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </DatePicker.Resources>
-                </DatePicker>
+                <TextBox MaxLength="4" Text="{Binding VehicleYear, UpdateSourceTrigger=PropertyChanged}" TabIndex="5" HorizontalContentAlignment="Stretch" Margin="10" Grid.Row="3" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="3" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="Year : "/>
             </Grid>
 
@@ -91,16 +83,20 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Violation" FontSize="28" Foreground="#EFEFFD"/>
-                <ComboBox TabIndex="6" Margin="10" Grid.Row="1" Width="218"  HorizontalAlignment="Right" FontSize="24" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <TextBox Text="{Binding ViolationID, UpdateSourceTrigger=PropertyChanged}" TabIndex="6" Margin="10" Grid.Row="1" Width="218"  HorizontalAlignment="Right" FontSize="24" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="1" HorizontalAlignment="Left" FontSize="24" Foreground="#EFEFFD" Text="ID : "/>
-                <ComboBox VerticalAlignment="Center" TabIndex="7" Margin="10 0 10 10" Grid.Row="2" Width="218"  HorizontalAlignment="Right" FontSize="24" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <TextBox Text="{Binding ViolationPelak, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" TabIndex="7" Margin="10 0 10 10" Grid.Row="2" Width="218"  HorizontalAlignment="Right" FontSize="24" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock VerticalAlignment="Center" Margin="10 0 10 10" Grid.Row="2" HorizontalAlignment="Left" FontSize="24" Foreground="#EFEFFD" Text="Pelak : "/>
-                <xctk:DateTimePicker TabIndex="8" HorizontalContentAlignment="Stretch" Margin="0 0 0 10" Grid.Row="4" Width="430"  HorizontalAlignment="Right" FontSize="21" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <xctk:DateTimePicker Value="{Binding ViolationTime, UpdateSourceTrigger=PropertyChanged}" TabIndex="8" HorizontalContentAlignment="Stretch" Margin="0 0 0 10" Grid.Row="4" Width="430"  HorizontalAlignment="Right" FontSize="21" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10 0 10 5" Grid.Row="3" HorizontalAlignment="Left" FontSize="24" Foreground="#EFEFFD" Text="Time : "/>
                 <TextBlock Margin="10 0 10 10" Grid.Row="5" HorizontalAlignment="Left" FontSize="24" Foreground="#EFEFFD" Text="Type : "/>
                 <TextBlock Margin="10 0 10 0" Grid.Row="6" HorizontalAlignment="Left" FontSize="24" Foreground="#EFEFFD" Text="Cost : "/>
-                <ComboBox TabIndex="6" Margin="10 0 10 10" Grid.Row="5" Width="218"  HorizontalAlignment="Right" FontSize="24" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
-                <TextBox TabIndex="6" Margin="10 0 10 0" Grid.Row="6" Width="218"  HorizontalAlignment="Right" FontSize="24" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <ComboBox SelectedIndex="{Binding ViolationType, UpdateSourceTrigger=PropertyChanged}" TabIndex="6" Margin="10 0 10 10" Grid.Row="5" Width="218"  HorizontalAlignment="Right" FontSize="24" BorderThickness="1">
+                    <ComboBoxItem IsSelected="True">Overtaking</ComboBoxItem>
+                    <ComboBoxItem>Speed</ComboBoxItem>
+                    <ComboBoxItem>Belt</ComboBoxItem>
+                </ComboBox>
+                <TextBox  Text="{Binding ViolationCost, UpdateSourceTrigger=PropertyChanged}" TabIndex="6" Margin="10 0 10 0" Grid.Row="6" Width="218"  HorizontalAlignment="Right" FontSize="24" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
 
             </Grid>
 
@@ -111,37 +107,46 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Person's vehicle" FontSize="28" Foreground="#EFEFFD"/>
-                <ComboBox TabIndex="4" Margin="10" Grid.Row="2" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <TextBox  Text="{Binding PersonsVehiclePelak, UpdateSourceTrigger=PropertyChanged}" TabIndex="4" Margin="10" Grid.Row="2" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="2" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="Pelak : "/>
-                <ComboBox TabIndex="4" Margin="10" Grid.Row="1" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
+                <TextBox  Text="{Binding PersonsVehicleID, UpdateSourceTrigger=PropertyChanged}" TabIndex="3" Margin="10" Grid.Row="1" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="1" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="ID : "/>
 
             </Grid>
+            <Button Command="{Binding AddPerson}" Background="Transparent" Height="35" Width="105" BorderThickness="0"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 6 10 0">
+                <Border Cursor="Hand" Height="30" Width="100" Background="LightGreen" CornerRadius="15">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Width="24" Height="24" Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 5 0"/>
+                        <TextBlock Text="Add" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+            <Button  Command="{Binding AddVehicle}" Background="Transparent" Grid.Column="1" Height="35" Width="105" BorderThickness="0"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 6 10 0">
 
-            <Border Cursor="Hand" Height="30" Width="100" Background="LightGreen" CornerRadius="15" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 6 10 0">
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Width="24" Height="24" Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 5 0"/>
-                    <TextBlock Text="Add" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-            <Border  Cursor="Hand" Grid.Column="1" Height="30" Width="100" Background="LightGreen" CornerRadius="15" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 6 10 0">
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Width="24" Height="24" Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 5 0"/>
-                    <TextBlock Text="Add" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-            <Border Cursor="Hand" Grid.Row="1" Height="30" Width="100" Background="LightGreen" CornerRadius="15" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 6 10 0">
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Width="24" Height="24" Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 5 0"/>
-                    <TextBlock Text="Add" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-            <Border Cursor="Hand" Grid.Row="1" Grid.Column="1" Height="30" Width="100" Background="LightGreen" CornerRadius="15" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 6 10 0">
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Width="24" Height="24" Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 5 0"/>
-                    <TextBlock Text="Add" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Border>
+                <Border  Cursor="Hand"  Height="30" Width="100" Background="LightGreen" CornerRadius="15" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Width="24" Height="24" Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 5 0"/>
+                        <TextBlock Text="Add" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+            <Button  Command="{Binding AddViolation}" Background="Transparent" Grid.Row="1" Height="35" Width="105" BorderThickness="0"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 6 10 0">
+                <Border Cursor="Hand"  Height="30" Width="100" Background="LightGreen" CornerRadius="15" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Width="24" Height="24" Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 5 0"/>
+                        <TextBlock Text="Add" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+            <Button  Command="{Binding AddPersonsVehicle}" Background="Transparent" Grid.Row="1" Grid.Column="1"  Height="35" Width="105" BorderThickness="0"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 6 10 0">
+
+                <Border Cursor="Hand" Height="30" Width="100" Background="LightGreen" CornerRadius="15" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Width="24" Height="24" Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 5 0"/>
+                        <TextBlock Text="Add" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>
