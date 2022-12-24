@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using TVIS.Commands;
+using TVIS.MVVM.Models;
 
 namespace TVIS.MVVM.ViewModels
 {
@@ -51,6 +54,19 @@ namespace TVIS.MVVM.ViewModels
             {
                 _PersonLastName = value;
                 OnPropertyChanged(nameof(PersonLastName));
+            }
+        }
+        private BitmapSource _PersonImage;
+        public BitmapSource PersonImage
+        {
+            get
+            {
+                return _PersonImage;
+            }
+            set
+            {
+                _PersonImage = value;
+                OnPropertyChanged(nameof(PersonImage));
             }
         }
         private string _VehiclePelak;
@@ -131,7 +147,7 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(ViolationType));
             }
         }
-        private DateTime _ViolationTime;
+        private DateTime _ViolationTime=new(2022,1,1);
         public DateTime ViolationTime
         {
             get
@@ -183,11 +199,15 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(PersonsVehiclePelak));
             }
         }
+        
 
-
-        public InsertionViewModel()
+        public InsertionViewModel(TVISModel tvis)
         {
-
+            AddPerson = new AddPersonCommand(this, tvis);
+            AddVehicle = new AddVehicleCommand(this, tvis);
+            AddViolation = new AddViolationCommand(this, tvis);
+            AddPersonsVehicle = new AddPersonsVehicleCommand(this, tvis);
+            SelectImg = new SelectImgCommand(this);
         }
     }
 }

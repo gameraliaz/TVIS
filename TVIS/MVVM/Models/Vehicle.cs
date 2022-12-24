@@ -38,7 +38,7 @@ namespace TVIS.MVVM.Models
                 var message = string.Format("Pelak({0}) is not valid.", Pelak);
                 throw new ArgumentException(message, nameof(this.Pelak));
             }
-            this.Pelak = Pelak;
+            this.Pelak = Pelak.Substring(0, 6) + Pelak[..2];
         }
 
         public override string ToString()

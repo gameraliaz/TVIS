@@ -20,7 +20,7 @@ namespace TVIS
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(tvis)
             };
             MainWindow.Show();
             base.OnStartup(e);

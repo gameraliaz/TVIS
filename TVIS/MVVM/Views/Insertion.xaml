@@ -42,8 +42,9 @@
                 <TextBlock Margin="10" Grid.Row="2" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="Firstname : "/>
                 <TextBox Text="{Binding PersonLastName, UpdateSourceTrigger=PropertyChanged}" TabIndex="2" Margin="10" Grid.Row="3" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="3" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="Lastname : "/>
-                <Button Command="{Binding SelectImg}" Background="Transparent"  BorderThickness="0" Cursor="Hand" Margin="0 20 0 0" Grid.Row="4" Width="300" Height="45">
-                    <Border   CornerRadius="22" Background="LightBlue" Width="300" Height="45">
+                <Image Height="90" Width="90" HorizontalAlignment="Left" Margin="50 2"  Source="{Binding PersonImage}" Grid.Row="4"/>
+                <Button Command="{Binding SelectImg}" Background="Transparent" HorizontalAlignment="Right"  BorderThickness="0" Cursor="Hand" Margin="0 0 10 0" Grid.Row="4" Width="200" Height="50">
+                    <Border   Width="200" CornerRadius="22" Background="LightBlue"  Height="45">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <materialDesign:PackIcon Width="30" Height="30" Kind="ImageAdd" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 10 0"/>
                             <TextBlock FontSize="24"  Text="Select picture" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 0"/>

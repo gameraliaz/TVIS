@@ -183,7 +183,7 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(PersonsVehiclePelak));
             }
         }
-        public ModifyViewModel()
+        public ModifyViewModel(Models.TVISModel tvis)
         {
 
         }

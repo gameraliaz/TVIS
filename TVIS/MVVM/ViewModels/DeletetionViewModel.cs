@@ -23,7 +23,7 @@ namespace TVIS.MVVM.ViewModels
         public ICommand DeleteViolation { get; }
         public ICommand DeletePersonsVehicle { get; }
 
-        public DeletetionViewModel()
+        public DeletetionViewModel(Models.TVISModel tvis)
         {
             _Persons = new();
             _Vehicles = new();

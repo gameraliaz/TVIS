@@ -131,7 +131,7 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(imgVVPelak));
             }
         }
-        private DateTime _StartDate;
+        private DateTime _StartDate=new(2022,1,1);
         public DateTime StartDate
         {
             get
@@ -144,7 +144,7 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(StartDate));
             }
         }
-        private DateTime _EndDate;
+        private DateTime _EndDate=new(2022,12,29);
         public DateTime EndDate
         {
             get
@@ -201,7 +201,7 @@ namespace TVIS.MVVM.ViewModels
         public ICommand ShowVehicleViolations { get; }
 
 
-        public DashboardViewModel()
+        public DashboardViewModel(TVISModel tvis)
         {
             _Persons = new()
             {
