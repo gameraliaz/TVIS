@@ -9,7 +9,7 @@ using TVIS.MVVM.Models;
 
 namespace TVIS.MVVM.ViewModels
 {
-    public class VehicleViewModel:ViewModelBase
+    public class VehicleViewModel:TableViewModel
     {
         private readonly Vehicle _Vehicle;
         public string Pelak => _Vehicle.Pelak;

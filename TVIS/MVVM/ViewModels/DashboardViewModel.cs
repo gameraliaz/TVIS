@@ -169,14 +169,12 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(SelectedTableName));
             }
         }
+        //private readonly ObservableCollection<TableViewModel> _Table;
+        public IEnumerable<TableViewModel> Table { get; set; }
         private readonly ObservableCollection<PersonViewModel> _Persons;
-		public IEnumerable<PersonViewModel> Persons => _Persons;
         private readonly ObservableCollection<VehicleViewModel> _Vehicles;
-        public IEnumerable<VehicleViewModel> Vehicles => _Vehicles;
         private readonly ObservableCollection<ViolationViewModel> _Violations;
-        public IEnumerable<ViolationViewModel> Violations => _Violations;
         private readonly ObservableCollection<PersonsVehicleViewModel> _PersonsVehicles;
-        public IEnumerable<PersonsVehicleViewModel> PersonsVehicles => _PersonsVehicles;
         public ICommand ShowPersons { get; }
 		public ICommand ShowVehicles { get; }
 		public ICommand ShowViolations { get; }
@@ -196,10 +194,11 @@ namespace TVIS.MVVM.ViewModels
                 new PersonViewModel(new Person("1130570013") { FirstName = "jafar", LastName = "lotfi" }),
                 new PersonViewModel(new Person("1130570014") { FirstName = "sadegh", LastName = "shams" }),
         };
-            
             _Vehicles = new();
             _Violations = new();
             _PersonsVehicles = new();
+            Table = _Persons;
+
         }
     }
 }

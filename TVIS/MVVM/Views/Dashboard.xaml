@@ -74,7 +74,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{Binding SelectedTableName, UpdateSourceTrigger=PropertyChanged}" Foreground="#EFEFFD" FontSize="24"/>
                 </Grid>
-                <DataGrid GridLinesVisibility="None" Grid.Row="2" x:Name="dg" ItemsSource="{Binding Path=Persons, UpdateSourceTrigger=PropertyChanged}"
+                <DataGrid GridLinesVisibility="None" Grid.Row="2" x:Name="dg" ItemsSource="{Binding Path=Table, UpdateSourceTrigger=PropertyChanged}"
                             AutoGenerateColumns="True"/>
             </Grid>
             

@@ -9,7 +9,7 @@ using TVIS.MVVM.Models;
 
 namespace TVIS.MVVM.ViewModels
 {
-    public class PersonViewModel:ViewModelBase
+    public class PersonViewModel:TableViewModel
     {
         private readonly Person _Person;
         public string? ID => _Person.ID;
