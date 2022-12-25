@@ -40,7 +40,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Persons" Foreground="#EFEFFD" FontSize="24"/>
                 </Grid>
-                <DataGrid GridLinesVisibility="None" Grid.Row="2" x:Name="dg" ItemsSource="{Binding Path=Persons, UpdateSourceTrigger=PropertyChanged}"
+                <DataGrid SelectedIndex="{Binding PersonsIndex,UpdateSourceTrigger=PropertyChanged}" GridLinesVisibility="None" Grid.Row="2" x:Name="dg" ItemsSource="{Binding Path=Persons, UpdateSourceTrigger=PropertyChanged}"
                             AutoGenerateColumns="True"/>
             </Grid>
             <Grid  Grid.Column="1">
@@ -56,7 +56,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Vehicles" Foreground="#EFEFFD" FontSize="24"/>
                 </Grid>
-                <DataGrid GridLinesVisibility="None" Grid.Row="2" x:Name="dg1" ItemsSource="{Binding Path=Vehicles, UpdateSourceTrigger=PropertyChanged}"
+                <DataGrid SelectedIndex="{Binding VehiclesIndex,UpdateSourceTrigger=PropertyChanged}" GridLinesVisibility="None" Grid.Row="2" x:Name="dg1" ItemsSource="{Binding Path=Vehicles, UpdateSourceTrigger=PropertyChanged}"
                             AutoGenerateColumns="True"/>
             </Grid>
             <Grid  Grid.Row="1">
@@ -72,7 +72,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Violations" Foreground="#EFEFFD" FontSize="24"/>
                 </Grid>
-                <DataGrid GridLinesVisibility="None" Grid.Row="2" x:Name="dg2" ItemsSource="{Binding Path=Violations, UpdateSourceTrigger=PropertyChanged}"
+                <DataGrid  SelectedIndex="{Binding ViolationsIndex,UpdateSourceTrigger=PropertyChanged}" GridLinesVisibility="None" Grid.Row="2" x:Name="dg2" ItemsSource="{Binding Path=Violations, UpdateSourceTrigger=PropertyChanged}"
                             AutoGenerateColumns="True"/>
             </Grid>
             <Grid  Grid.Row="1" Grid.Column="1">
@@ -88,7 +88,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Person's Vehicles" Foreground="#EFEFFD" FontSize="24"/>
                 </Grid>
-                <DataGrid GridLinesVisibility="None" Grid.Row="2" x:Name="dg3" ItemsSource="{Binding Path=PersonsVehicles, UpdateSourceTrigger=PropertyChanged}"
+                <DataGrid SelectedIndex="{Binding PersonsVehiclesIndex,UpdateSourceTrigger=PropertyChanged}" GridLinesVisibility="None" Grid.Row="2" x:Name="dg3" ItemsSource="{Binding Path=PersonsVehicles, UpdateSourceTrigger=PropertyChanged}"
                             AutoGenerateColumns="True"/>
             </Grid>
             <!--<local:TableView />

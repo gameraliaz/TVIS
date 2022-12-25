@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace TVIS.Commands
         {
             this.insertionViewModel = insertionViewModel;
             this.tvis = tvis;
+            insertionViewModel.PropertyChanged += OnViewModelPropertyChenged;
 
         }
 
@@ -44,6 +46,17 @@ namespace TVIS.Commands
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+        }
+        public override bool CanExecute(object? parameter)
+        {
+            return (!string.IsNullOrEmpty(insertionViewModel.VehiclePelak?.Trim())) && base.CanExecute(parameter);
+        }
+        private void OnViewModelPropertyChenged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(insertionViewModel.VehiclePelak))
+            {
+                OnCanExecuteChanged();
+            }
         }
     }
 }

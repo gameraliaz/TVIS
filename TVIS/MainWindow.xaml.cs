@@ -3,6 +3,8 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using TVIS.MVVM.Models;
 using TVIS.MVVM.Views;
+using TVIS.MVVM.ViewModels;
+using TVIS.Stores;
 
 namespace TVIS
 {
@@ -11,12 +13,15 @@ namespace TVIS
     /// </summary>
     public partial class MainWindow : Window
     {
-       
-
-        public MainWindow()
+        private readonly NavigationStore _NavigationStore;
+        private readonly TVISModel tvis;
+        public MainWindow(NavigationStore NavigationStore, TVISModel tvis) 
         {
             InitializeComponent();
+            _NavigationStore = NavigationStore;
+            this.tvis = tvis;
         }
+
         void Colapsingmenu(object sender, RoutedEventArgs e)
         {
             Storyboard? sb = (Resources["Colapsing"] as Storyboard);
@@ -30,41 +35,39 @@ namespace TVIS
 
         private void border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var myWindow = Window.GetWindow(this);
             try
-            { myWindow.DragMove(); }
+            { DragMove(); }
             catch { }
         }
 
         private void Lmenu_MouseDownDashboard(object sender, RoutedEventArgs e)
         {
-
+            _NavigationStore.CurrentViewModel = new DashboardViewModel(tvis);
         }
 
         private void Lmenu_MouseDownInsertion(object sender, RoutedEventArgs e)
         {
-
+            _NavigationStore.CurrentViewModel = new InsertionViewModel(tvis);
         }
 
         private void Lmenu_MouseDownModify(object sender, RoutedEventArgs e)
         {
-
+            _NavigationStore.CurrentViewModel = new ModifyViewModel(tvis);
         }
 
         private void Lmenu_MouseDownDeletetion(object sender, RoutedEventArgs e)
         {
-
+            _NavigationStore.CurrentViewModel = new DeletetionViewModel(tvis);
         }
 
         private void Lmenu_MouseDownInfo(object sender, RoutedEventArgs e)
         {
-
+            _NavigationStore.CurrentViewModel = new InfoViewModel();
         }
 
         private void Lmenu_MouseDownExit(object sender, RoutedEventArgs e)
         {
-            var myWindow = Window.GetWindow(this);
-            myWindow.Close();
+            Close();
         }
     }
 }

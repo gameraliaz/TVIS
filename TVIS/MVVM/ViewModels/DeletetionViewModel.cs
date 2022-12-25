@@ -5,11 +5,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TVIS.Commands;
 
 namespace TVIS.MVVM.ViewModels
 {
     public class DeletetionViewModel:ViewModelBase
     {
+        private int? _PersonsIndex;
+        public int? PersonsIndex
+        {
+            get
+            {
+                return _PersonsIndex;
+            }
+            set
+            {
+                _PersonsIndex = value;
+                OnPropertyChanged(nameof(PersonsIndex));
+            }
+        }
+        private int? _VehiclesIndex;
+        public int? VehiclesIndex
+        {
+            get
+            {
+                return _VehiclesIndex;
+            }
+            set
+            {
+                _VehiclesIndex = value;
+                OnPropertyChanged(nameof(VehiclesIndex));
+            }
+        }
+        private int? _ViolationsIndex;
+        public int? ViolationsIndex
+        {
+            get
+            {
+                return _ViolationsIndex;
+            }
+            set
+            {
+                _ViolationsIndex = value;
+                OnPropertyChanged(nameof(ViolationsIndex));
+            }
+        }
+        private int? _PersonsVehiclesIndex;
+        public int? PersonsVehiclesIndex
+        {
+            get
+            {
+                return _PersonsVehiclesIndex;
+            }
+            set
+            {
+                _PersonsVehiclesIndex = value;
+                OnPropertyChanged(nameof(PersonsVehiclesIndex));
+            }
+        }
         private readonly ObservableCollection<PersonViewModel> _Persons;
         public IEnumerable<PersonViewModel> Persons => _Persons;
         private readonly ObservableCollection<VehicleViewModel> _Vehicles;
@@ -29,6 +82,11 @@ namespace TVIS.MVVM.ViewModels
             _Vehicles = new();
             _Violations = new();
             _PersonsVehicles = new();
+
+            DeletePerson = new DeletePersonCommand(this, tvis);
+            DeleteVehicle=new DeleteVehicleCommand(this,tvis);
+            DeleteViolation=new DeleteViolationCommand(this,tvis);
+            DeletePersonsVehicle=new DeletePersonsVehicleCommand(this,tvis);
         }
 
     }

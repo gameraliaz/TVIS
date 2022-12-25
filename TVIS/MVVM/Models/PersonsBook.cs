@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TVIS.Exceptions;
 
 namespace TVIS.MVVM.Models
@@ -20,6 +21,24 @@ namespace TVIS.MVVM.Models
             }
             Persons.Add(Person);
         }
+        public void DeletePersons(string ID)
+        {
+            Person prsn = new(ID);
+            foreach (Person p in Persons)
+            {
+                if (p.Equals(prsn))
+                {
+                    Persons.Remove(p);
+                    break;
+                }
+            }
+        }
+        public void EditPersons(Person Person)
+        {
+            Persons.Remove(Persons.ElementAt(Persons.IndexOf(Person)));
+            AddPersons(Person);
+        }
+
 
         public IEnumerable<Person> GetPersons()
         {

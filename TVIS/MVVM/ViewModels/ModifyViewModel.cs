@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using TVIS.Commands;
+using TVIS.MVVM.Models;
 
 namespace TVIS.MVVM.ViewModels
 {
     public class ModifyViewModel:ViewModelBase
     {
-        public ICommand AddPerson { get; }
-        public ICommand AddVehicle { get; }
-        public ICommand AddViolation { get; }
-        public ICommand AddPersonsVehicle { get; }
+        public ICommand EditPerson { get; }
+        public ICommand EditVehicle { get; }
+        public ICommand EditViolation { get; }
+        public ICommand EditPersonsVehicle { get; }
         public ICommand SelectImg { get; }
         private string _PersonID;
         public string PersonID
@@ -53,6 +56,19 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(PersonLastName));
             }
         }
+        private BitmapSource _PersonImage;
+        public BitmapSource PersonImage
+        {
+            get
+            {
+                return _PersonImage;
+            }
+            set
+            {
+                _PersonImage = value;
+                OnPropertyChanged(nameof(PersonImage));
+            }
+        }
         private string _VehiclePelak;
         public string VehiclePelak
         {
@@ -79,8 +95,8 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(VehicleType));
             }
         }
-        private DateTime _VehicleYear;
-        public DateTime VehicleYear
+        private string _VehicleYear;
+        public string VehicleYear
         {
             get
             {
@@ -131,8 +147,8 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(ViolationType));
             }
         }
-        private string _ViolationTime;
-        public string ViolationTime
+        private DateTime _ViolationTime;
+        public DateTime ViolationTime
         {
             get
             {
@@ -183,9 +199,12 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(PersonsVehiclePelak));
             }
         }
-        public ModifyViewModel(Models.TVISModel tvis)
-        {
 
+
+        public ModifyViewModel(TVISModel tvis)
+        {
+            SelectImg = new SelectImgModifyCommand(this);
         }
+
     }
 }

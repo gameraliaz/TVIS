@@ -21,6 +21,24 @@ namespace TVIS.MVVM.Models
             }
             PersonsVehicles.Add(PersonsVehicle);
         }
+        public void DeletePersonsVehicles(string ID,string Pelak)
+        {
+            PersonsVehicle prsnvhicl=new(new(ID),new(Pelak));
+            foreach (PersonsVehicle p in PersonsVehicles)
+            {
+                if (p.Equals(prsnvhicl))
+                {
+                    PersonsVehicles.Remove(p);
+                    break;
+                }
+            }
+        }
+        public void EditPersonsVehicles(PersonsVehicle personsVehicle)
+        {
+            PersonsVehicles.Remove(PersonsVehicles.ElementAt(PersonsVehicles.IndexOf(personsVehicle)));
+            AddPersonsVehicles(personsVehicle);
+        }
+
 
         public IEnumerable<PersonsVehicle> GetPersonsVehicles()
         {

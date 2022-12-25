@@ -192,6 +192,13 @@ namespace TVIS.MVVM.ViewModels
         public IEnumerable<ViolationViewModel> Violations => _Violations;
         private readonly ObservableCollection<PersonsVehicleViewModel> _PersonsVehicles;
         public IEnumerable<PersonsVehicleViewModel> PersonsVehicles => _PersonsVehicles;
+        private readonly ObservableCollection<PersonsViolationViewModel> _PersonsViolations;
+        public IEnumerable<PersonsViolationViewModel> PersonsViolations => _PersonsViolations;
+        private readonly ObservableCollection<ViolationViewModel> _PersonsTimeViolations;
+        public IEnumerable<ViolationViewModel> PersonsTimeViolations => _PersonsTimeViolations;
+
+        private readonly ObservableCollection<VehiclesViolationViewModel> _VehiclesViolations;
+        public IEnumerable<VehiclesViolationViewModel> VehiclesViolations => _VehiclesViolations;
         public ICommand ShowPersons { get; }
         public ICommand ShowVehicles { get; }
         public ICommand ShowViolations { get; }
@@ -211,14 +218,24 @@ namespace TVIS.MVVM.ViewModels
                 new PersonViewModel(new Person("1130570013") { FirstName = "jafar", LastName = "lotfi" }),
                 new PersonViewModel(new Person("1130570014") { FirstName = "sadegh", LastName = "shams" }),
         };
+
             _Vehicles = new();
             _Violations = new();
             _PersonsVehicles = new();
+            _PersonsViolations= new();
+            _PersonsTimeViolations= new();
+            _VehiclesViolations=new();
+
             Table = Persons;
+
             ShowPersons = new ShowPersonsCommand(this);
             ShowVehicles = new ShowVehiclesCommand(this);
             ShowViolations = new ShowViolationsCommand(this);
             ShowPersonsVehicles = new ShowPersonsVehiclesCommand(this);
+
+            ShowPersonViolations= new ShowPersonViolationsCommand(this);
+            ShowPersonViolationsDate=new ShowPersonViolationsDateCommand(this);
+            ShowVehicleViolations=new ShowVehicleViolationsCommand(this);
         }
     }
 }

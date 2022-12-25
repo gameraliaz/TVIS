@@ -22,6 +22,23 @@ namespace TVIS.MVVM.Models
             }
             Violations.Add(Violation);
         }
+        public void DeleteViolation(string ID,string Pelak,DateTime Time)
+        {
+            Violation viol=new(new(ID),new(Pelak),Time);
+            foreach (Violation v in Violations)
+            {
+                if (v.Equals(viol))
+                {
+                    Violations.Remove(viol);
+                    break;
+                }
+            }
+        }
+        public void EditViolation(Violation Violation)
+        {
+            Violations.Remove(Violations.ElementAt(Violations.IndexOf(Violation)));
+            AddViolation(Violation);
+        }
 
         public IEnumerable<Violation> GetViolations()
         {

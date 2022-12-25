@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using TVIS.MVVM.Models;
 using TVIS.MVVM.ViewModels;
+using TVIS.Stores;
 
 namespace TVIS
 {
@@ -10,17 +11,21 @@ namespace TVIS
     public partial class App : Application
     {
         private readonly TVISModel tvis;
-
+        private readonly NavigationStore _NavigationStore;
         public App()
         {
             tvis = new();
+            _NavigationStore = new NavigationStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow()
+            _NavigationStore.CurrentViewModel = new DashboardViewModel(tvis);
+
+
+            MainWindow = new MainWindow(_NavigationStore,tvis)
             {
-                DataContext = new MainViewModel(tvis)
+                DataContext = new MainViewModel(_NavigationStore)
             };
             MainWindow.Show();
             base.OnStartup(e);
