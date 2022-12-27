@@ -26,7 +26,7 @@ namespace TVIS.Commands
         public override void Execute(object? parameter)
         {
             int? cost = null;
-            if (Convert.ToInt32(insertionViewModel.ViolationCost)!=0)
+            if (!string.IsNullOrEmpty(insertionViewModel.ViolationCost?.Trim()))
                 cost = Convert.ToInt32(insertionViewModel.ViolationCost.Trim());
             Violation violation = new(new Person(insertionViewModel.ViolationID), new Vehicle(insertionViewModel.ViolationPelak),
                 insertionViewModel.ViolationTime)

@@ -64,7 +64,8 @@
                 <TextBox Text="{Binding VehiclePelak, UpdateSourceTrigger=PropertyChanged}" TabIndex="3" Margin="10" Grid.Row="1" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1" Background="Transparent" Foreground="#EFEFFD"/>
                 <TextBlock Margin="10" Grid.Row="1" HorizontalAlignment="Left" FontSize="32" Foreground="#EFEFFD" Text="Pelak : "/>
                 <ComboBox SelectedIndex="{Binding VehicleType, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" TabIndex="4" Margin="10" Grid.Row="2" Width="218"  HorizontalAlignment="Right" FontSize="32" BorderThickness="1"  >
-                    <ComboBoxItem  IsSelected="True">Car</ComboBoxItem>
+                    <ComboBoxItem  IsSelected="True">Null</ComboBoxItem>
+                    <ComboBoxItem>Car</ComboBoxItem>
                     <ComboBoxItem>Truck</ComboBoxItem>
                     <ComboBoxItem>Motorcycle</ComboBoxItem>
                 </ComboBox>
@@ -93,7 +94,8 @@
                 <TextBlock Margin="10 0 10 10" Grid.Row="5" HorizontalAlignment="Left" FontSize="24" Foreground="#EFEFFD" Text="Type : "/>
                 <TextBlock Margin="10 0 10 0" Grid.Row="6" HorizontalAlignment="Left" FontSize="24" Foreground="#EFEFFD" Text="Cost : "/>
                 <ComboBox SelectedIndex="{Binding ViolationType, UpdateSourceTrigger=PropertyChanged}" TabIndex="6" Margin="10 0 10 10" Grid.Row="5" Width="218"  HorizontalAlignment="Right" FontSize="24" BorderThickness="1">
-                    <ComboBoxItem IsSelected="True">Overtaking</ComboBoxItem>
+                    <ComboBoxItem IsSelected="True">Null</ComboBoxItem>
+                    <ComboBoxItem>Overtaking</ComboBoxItem>
                     <ComboBoxItem>Speed</ComboBoxItem>
                     <ComboBoxItem>Belt</ComboBoxItem>
                 </ComboBox>

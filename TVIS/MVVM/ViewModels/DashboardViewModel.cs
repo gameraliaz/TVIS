@@ -15,71 +15,16 @@ namespace TVIS.MVVM.ViewModels
 {
     public class DashboardViewModel : ViewModelBase
     {
-        private int _SumOfCost;
-        public string SumOfCost
-        {
-            get
-            {
-                return _SumOfCost.ToString();
-            }
-            set
-            {
-                _SumOfCost = Convert.ToInt32(value);
-                OnPropertyChanged(nameof(SumOfCost));
-            }
-        }
-        private int _CountOfPersons;
-        public string CountOfPersons
-        {
-            get
-            {
-                return _CountOfPersons.ToString();
-            }
-            set
-            {
-                _CountOfPersons = Convert.ToInt32(value);
-                OnPropertyChanged(nameof(CountOfPersons));
-            }
-        }
-        private int _CountOfVehicles;
-        public string CountOfVehicles
-        {
-            get
-            {
-                return _CountOfVehicles.ToString();
-            }
-            set
-            {
-                _CountOfVehicles = Convert.ToInt32(value);
-                OnPropertyChanged(nameof(CountOfVehicles));
-            }
-        }
-        private int _CountOfViolations;
-        public string CountOfViolations
-        {
-            get
-            {
-                return _CountOfViolations.ToString(); ;
-            }
-            set
-            {
-                _CountOfViolations = Convert.ToInt32(value);
-                OnPropertyChanged(nameof(CountOfViolations));
-            }
-        }
-        private int _CountOfPersonsVehicles;
-        public string CountOfPersonsVehicles
-        {
-            get
-            {
-                return _CountOfPersonsVehicles.ToString();
-            }
-            set
-            {
-                _CountOfPersonsVehicles = Convert.ToInt32(value);
-                OnPropertyChanged(nameof(CountOfPersonsVehicles));
-            }
-        }
+
+        public string SumOfCost => tvis.GetSumOfCost().ToString();
+        
+        public string CountOfPersons => _Persons.Count.ToString();
+       
+        public string CountOfVehicles => _Vehicles.Count.ToString();
+        
+        public string CountOfViolations => _Violations.Count.ToString();
+        
+        public string CountOfPersonsVehicles => _PersonsVehicles.Count.ToString();
         private string _PVID;
         public string PVID
         {
@@ -119,8 +64,8 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(PVDID));
             }
         }
-        private BitmapSource _imgVVPelak;
-        public BitmapSource imgVVPelak
+        private BitmapImage? _imgVVPelak;
+        public BitmapImage? imgVVPelak
         {
             get
             {
@@ -173,7 +118,6 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(SelectedTableName));
             }
         }
-        //private readonly ObservableCollection<TableViewModel> _Table;
         public IEnumerable<TableViewModel> Table { 
             get 
             {
@@ -198,8 +142,8 @@ namespace TVIS.MVVM.ViewModels
         private readonly ObservableCollection<ViolationViewModel> _PersonsTimeViolations;
         public IEnumerable<ViolationViewModel> PersonsTimeViolations => _PersonsTimeViolations;
         private readonly ObservableCollection<VehiclesViolationViewModel> _VehiclesViolations;
-        private readonly TVISModel tvis;
         public IEnumerable<VehiclesViolationViewModel> VehiclesViolations => _VehiclesViolations;
+        private readonly TVISModel tvis;
         public ICommand ShowPersons { get; }
         public ICommand ShowVehicles { get; }
         public ICommand ShowViolations { get; }
@@ -226,9 +170,9 @@ namespace TVIS.MVVM.ViewModels
             ShowViolations = new ShowViolationsCommand(this);
             ShowPersonsVehicles = new ShowPersonsVehiclesCommand(this);
 
-            ShowPersonViolations= new ShowPersonViolationsCommand(this);
-            ShowPersonViolationsDate=new ShowPersonViolationsDateCommand(this);
-            ShowVehicleViolations=new ShowVehicleViolationsCommand(this);
+            ShowPersonViolations= new ShowPersonViolationsCommand(this, tvis, _PersonsViolations);
+            ShowPersonViolationsDate=new ShowPersonViolationsDateCommand(this, tvis, _PersonsTimeViolations);
+            ShowVehicleViolations=new ShowVehicleViolationsCommand(this, tvis, _VehiclesViolations);
 
             this.tvis = tvis;
             UpdateView();
@@ -264,7 +208,6 @@ namespace TVIS.MVVM.ViewModels
                 PersonsVehicleViewModel pv = new(a);
                 _PersonsVehicles.Add(pv);
             }
-            
         }
     }
 }

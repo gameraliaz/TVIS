@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TVIS.Commands;
+using TVIS.MVVM.Models;
 
 namespace TVIS.MVVM.ViewModels
 {
@@ -22,6 +23,7 @@ namespace TVIS.MVVM.ViewModels
             {
                 _PersonsIndex = value;
                 OnPropertyChanged(nameof(PersonsIndex));
+                
             }
         }
         private int? _VehiclesIndex;
@@ -70,23 +72,56 @@ namespace TVIS.MVVM.ViewModels
         private readonly ObservableCollection<ViolationViewModel> _Violations;
         public IEnumerable<ViolationViewModel> Violations => _Violations;
         private readonly ObservableCollection<PersonsVehicleViewModel> _PersonsVehicles;
+        private readonly TVISModel tvis;
+
         public IEnumerable<PersonsVehicleViewModel> PersonsVehicles => _PersonsVehicles;
         public ICommand DeletePerson { get; }
         public ICommand DeleteVehicle { get; }
         public ICommand DeleteViolation { get; }
         public ICommand DeletePersonsVehicle { get; }
 
-        public DeletetionViewModel(Models.TVISModel tvis)
+        public DeletetionViewModel(TVISModel tvis)
         {
             _Persons = new();
             _Vehicles = new();
             _Violations = new();
             _PersonsVehicles = new();
 
-            DeletePerson = new DeletePersonCommand(this, tvis);
-            DeleteVehicle=new DeleteVehicleCommand(this,tvis);
-            DeleteViolation=new DeleteViolationCommand(this,tvis);
-            DeletePersonsVehicle=new DeletePersonsVehicleCommand(this,tvis);
+            DeletePerson = new DeletePersonCommand(this, tvis, _Persons);
+            DeleteVehicle=new DeleteVehicleCommand(this,tvis, _Vehicles);
+            DeleteViolation=new DeleteViolationCommand(this,tvis, _Violations);
+            DeletePersonsVehicle=new DeletePersonsVehicleCommand(this,tvis, _PersonsVehicles);
+
+            this.tvis = tvis;
+            UpdateView();
+        }
+        private void UpdateView()
+        {
+            _Persons.Clear();
+            _Vehicles.Clear();
+            _Violations.Clear();
+            _PersonsVehicles.Clear();
+
+            foreach (var a in tvis.GetPersons())
+            {
+                PersonViewModel p = new(a);
+                _Persons.Add(p);
+            }
+            foreach (var a in tvis.GetVehicles())
+            {
+                VehicleViewModel v = new(a);
+                _Vehicles.Add(v);
+            }
+            foreach (var a in tvis.GetViolations())
+            {
+                ViolationViewModel v = new(a);
+                _Violations.Add(v);
+            }
+            foreach (var a in tvis.GetPersonsVehicles())
+            {
+                PersonsVehicleViewModel pv = new(a);
+                _PersonsVehicles.Add(pv);
+            }
         }
 
     }

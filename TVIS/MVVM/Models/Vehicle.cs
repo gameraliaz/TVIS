@@ -4,6 +4,7 @@ namespace TVIS.MVVM.Models
 {
     public enum VehiclesType
     {
+        Undifiend = 0,
         Car = 1,
         Truck = 2,
         Motorcycle = 3
@@ -12,8 +13,8 @@ namespace TVIS.MVVM.Models
     {
         public string Pelak { get; }
         public VehiclesType? TypeOfVehicle { get; set; }
-        int? yearOfConstruction;
-        public int? YearOfConstruction
+        short? yearOfConstruction;
+        public short? YearOfConstruction
         {
             get
             {

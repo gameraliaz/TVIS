@@ -29,6 +29,7 @@ namespace TVIS.Commands
             PersonsVehicle personsVehicle = new(new Person(insertionViewModel.PersonsVehicleID), new Vehicle(insertionViewModel.PersonsVehiclePelak));
             try
             {
+
                 tvis.MakePersonsVehicle(personsVehicle);
             }
             catch (PersonsVehicleExsistingException ex)

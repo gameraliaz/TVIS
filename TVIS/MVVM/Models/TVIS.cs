@@ -42,6 +42,12 @@ namespace TVIS.MVVM.Models
         {
             PersonsVehiclesBook = database.GetPersonsVehicles();
         }
+
+        public int GetSumOfCost()
+        {
+            return database.GetSumOfCost();
+        }
+
         public Tuple<BitmapImage?,List<PersonsViolation>> GetPersonsViolations(string ID)
         {
             return database.GetPersonsViolations(ID);
@@ -50,9 +56,9 @@ namespace TVIS.MVVM.Models
         {
             return database.GetPersonsViolationsTime(ID,StartDate,EndDate);
         }
-        public List<VehiclesViolation> GetVehiclesViolationsTime(string Pelak)
+        public List<VehiclesViolation> GetVehiclesViolations(string Pelak)
         {
-            return database.GetVehiclesViolationsTime(Pelak);
+            return database.GetVehiclesViolations(Pelak);
         }
 
         public void MakeViolation(Violation violation)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,13 @@ namespace TVIS.Commands
     {
         private readonly DeletetionViewModel deletetionViewModel;
         private readonly TVISModel tvis;
+        private readonly ObservableCollection<PersonsVehicleViewModel> personsVehicles;
 
-        public DeletePersonsVehicleCommand(DeletetionViewModel deletetionViewModel, TVISModel tvis)
+        public DeletePersonsVehicleCommand(DeletetionViewModel deletetionViewModel, TVISModel tvis, ObservableCollection<PersonsVehicleViewModel> _PersonsVehicles)
         {
             this.deletetionViewModel = deletetionViewModel;
             this.tvis = tvis;
-
+            personsVehicles = _PersonsVehicles;
             deletetionViewModel.PropertyChanged += OnViewModelPropertyChenged;
         }
 
@@ -27,10 +29,12 @@ namespace TVIS.Commands
             string? Pelak = deletetionViewModel.PersonsVehicles.ElementAtOrDefault((int)deletetionViewModel.PersonsVehiclesIndex).Pelak;
             string? ID = deletetionViewModel.PersonsVehicles.ElementAtOrDefault((int)deletetionViewModel.PersonsVehiclesIndex).ID;
             tvis.DeletePersonsVehicles(ID, Pelak);
+            personsVehicles.RemoveAt((int)deletetionViewModel.PersonsVehiclesIndex);
+            deletetionViewModel.PersonsVehiclesIndex = -1;
         }
         public override bool CanExecute(object? parameter)
         {
-            return deletetionViewModel.PersonsVehiclesIndex != null && base.CanExecute(parameter);
+            return deletetionViewModel.PersonsVehiclesIndex != null && deletetionViewModel.PersonsVehiclesIndex != -1 && base.CanExecute(parameter);
         }
         private void OnViewModelPropertyChenged(object? sender, PropertyChangedEventArgs e)
         {

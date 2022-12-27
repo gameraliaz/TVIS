@@ -5,6 +5,7 @@ namespace TVIS.MVVM.Models
 {
     public enum ViolationsType
     {
+        Undifiend = 0,
         Overtaking = 1,
         Speed = 2,
         Belt = 3,

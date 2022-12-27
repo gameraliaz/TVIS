@@ -42,36 +42,84 @@ namespace TVIS.Services
         public int InsertToPersons(Person person)
         {
             byte[]? bImage = ImageToByte(person.Image);
-            string sqlInsertion = $"INSERT INTO Persons values('{person.ID}','{person.FirstName}','{person.LastName}',@ImageArray)";
+            string sqlInsertion = $"INSERT INTO Persons values('{person.ID}',@FirstName,@LastName,@ImageArray)";
 
-            var byteParam = new SqlParameter("@ImageArray", SqlDbType.Image)
+            var FirstNameparam = new SqlParameter("@FirstName", SqlDbType.Char)
             {
                 Direction = ParameterDirection.Input,
-                Size = bImage.Length,
-                Value = bImage
-            }; 
+                Value = string.IsNullOrEmpty(person.FirstName) ? DBNull.Value : person.FirstName
+            };
+            var LastNameparam = new SqlParameter("@LastName", SqlDbType.Char)
+            {
+                Direction = ParameterDirection.Input,
+                Value = string.IsNullOrEmpty(person.LastName) ? DBNull.Value : person.LastName
+            };
+
+            var byteParam = new SqlParameter();
+            if (bImage != null)
+            {
+                byteParam = new SqlParameter("@ImageArray", SqlDbType.Image)
+                {
+                    Direction = ParameterDirection.Input,
+                    Size = bImage.Length,
+                    Value = bImage
+                };
+            }
+            else
+            {
+                byteParam = new SqlParameter("@ImageArray", SqlDbType.Image)
+                {
+                    Value = DBNull.Value,
+                };
+            }
 
             SqlCommand command = new SqlCommand(sqlInsertion, con);
             con.Open();
             command.Parameters.Add(byteParam);
-            int res=command.ExecuteNonQuery();
+            command.Parameters.Add(FirstNameparam);
+            command.Parameters.Add(LastNameparam);
+            int res = command.ExecuteNonQuery();
             con.Close();
             return res;
         }
         public int InsertToVehicles(Vehicle vehicle)
         {
-            string sqlInsertion = $"INSERT INTO Vehicles values('{vehicle.Pelak}',{vehicle.YearOfConstruction},{vehicle.TypeOfVehicle.Value})";
+            string sqlInsertion = $"INSERT INTO Vehicles values('{vehicle.Pelak}',@YearOfConstraction,@TypeOfVehicle)";
             SqlCommand command = new SqlCommand(sqlInsertion, con);
+            var YearOfConstractionparam = new SqlParameter("@YearOfConstraction", SqlDbType.SmallInt)
+            {
+                Direction = ParameterDirection.Input,
+                Value = vehicle.YearOfConstruction==null ? DBNull.Value : vehicle.YearOfConstruction
+            };
+            var TypeOfVehicleparam = new SqlParameter("@TypeOfVehicle", SqlDbType.TinyInt)
+            {
+                Direction = ParameterDirection.Input,
+                Value = vehicle.TypeOfVehicle==null ? DBNull.Value : vehicle.TypeOfVehicle.Value
+            };
             con.Open();
+            command.Parameters.Add(YearOfConstractionparam);
+            command.Parameters.Add(TypeOfVehicleparam);
             int res=command.ExecuteNonQuery();
             con.Close();
             return res;
         }
         public int InsertToViolations(Violation violation)
         {
-            string sqlInsertion = $"INSERT INTO Violations values('{violation.Person.ID}','{violation.Vehicle.Pelak}','{violation.ViolationDateTime}')";
+            string sqlInsertion = $"INSERT INTO Violations values('{violation.Person.ID}','{violation.Vehicle.Pelak}','{violation.ViolationDateTime}',@TypeOfViolation,@Cost)";
+            var Costparam = new SqlParameter("@Cost", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.Input,
+                Value = violation.Cost == null ? DBNull.Value : violation.Cost
+            };
+            var TypeOfViolationparam = new SqlParameter("@TypeOfViolation", SqlDbType.TinyInt)
+            {
+                Direction = ParameterDirection.Input,
+                Value = violation.TypeOfViolation == null ? DBNull.Value : violation.TypeOfViolation.Value
+            };
             SqlCommand command = new SqlCommand(sqlInsertion, con);
             con.Open();
+            command.Parameters.Add(Costparam);
+            command.Parameters.Add(TypeOfViolationparam);
             int res=command.ExecuteNonQuery();
             con.Close();
             return res;
@@ -97,7 +145,7 @@ namespace TVIS.Services
         }
         public int DeleteFromVehicles(string Pelak)
         {
-            string sqlDel = $"DELETE FROM Vehicles WHERE ID='{Pelak}'";
+            string sqlDel = $"DELETE FROM Vehicles WHERE Pelak='{Pelak}'";
             SqlCommand command = new SqlCommand(sqlDel, con);
             con.Open();
             int res=command.ExecuteNonQuery();
@@ -126,16 +174,40 @@ namespace TVIS.Services
         public int ModifyFromPersons(Person person)
         {
             byte[]? bImage = ImageToByte(person.Image);
-            string sqlUp = $"UPDATE TABLE Persons SET FirstName='{person.FirstName}' , LastName='{person.LastName}' , Image=@ImageArray where ID='{person.ID}';";
-            var byteParam = new SqlParameter("@ImageArray", SqlDbType.Image)
+            string sqlUp = $"UPDATE TABLE Persons SET FirstName=@FirstName, LastName=@LastName, Image=@ImageArray where ID='{person.ID}';";
+            var byteParam = new SqlParameter();
+            if (bImage != null)
+            {
+                byteParam = new SqlParameter("@ImageArray", SqlDbType.Image)
+                {
+                    Direction = ParameterDirection.Input,
+                    Size = bImage.Length,
+                    Value = bImage
+                };
+            }
+            else
+            {
+                byteParam = new SqlParameter("@ImageArray", SqlDbType.Image)
+                {
+                    Value = DBNull.Value,
+                };
+            }
+
+            var FirstNameparam = new SqlParameter("@FirstName", SqlDbType.Char)
             {
                 Direction = ParameterDirection.Input,
-                Size = bImage.Length,
-                Value = bImage
+                Value = string.IsNullOrEmpty(person.FirstName) ? DBNull.Value : person.FirstName
+            };
+            var LastNameparam = new SqlParameter("@LastName", SqlDbType.Char)
+            {
+                Direction = ParameterDirection.Input,
+                Value = string.IsNullOrEmpty(person.LastName) ? DBNull.Value : person.LastName
             };
 
             SqlCommand command = new SqlCommand(sqlUp, con);
             command.Parameters.Add(byteParam);
+            command.Parameters.Add(FirstNameparam);
+            command.Parameters.Add(LastNameparam);
             con.Open();
             int res=command.ExecuteNonQuery();
             con.Close();
@@ -143,22 +215,44 @@ namespace TVIS.Services
         }
         public int ModifyFromVehicles(Vehicle vehicle)
         {
-            string sqlUp = $"UPDATE TABLE Vehicles SET Type={vehicle.TypeOfVehicle.Value} , ConstractionYear='{vehicle.YearOfConstruction}' where Pelak='{vehicle.Pelak}';";
+            string sqlUp = $"UPDATE TABLE Vehicles SET Type=@TypeOfVehicle , ConstractionYear=@YearOfConstraction where Pelak='{vehicle.Pelak}';";
             
             SqlCommand command = new SqlCommand(sqlUp, con);
-
+            var YearOfConstractionparam = new SqlParameter("@YearOfConstraction", SqlDbType.SmallInt)
+            {
+                Direction = ParameterDirection.Input,
+                Value = vehicle.YearOfConstruction == null ? DBNull.Value : vehicle.YearOfConstruction
+            };
+            var TypeOfVehicleparam = new SqlParameter("@TypeOfVehicle", SqlDbType.TinyInt)
+            {
+                Direction = ParameterDirection.Input,
+                Value = vehicle.TypeOfVehicle == null ? DBNull.Value : vehicle.TypeOfVehicle.Value
+            };
             con.Open();
+            command.Parameters.Add(YearOfConstractionparam);
+            command.Parameters.Add(TypeOfVehicleparam);
             int res=command.ExecuteNonQuery();
             con.Close();
             return res;
         }
         public int ModifyFromViolations(Violation violation)
         {
-            string sqlUp = $"UPDATE TABLE Violations SET Type={violation.TypeOfViolation.Value} , Cost={violation.Cost} where ID='{violation.Person.ID}' and Pelak='{violation.Vehicle.Pelak}' and Time='{violation.ViolationDateTime}';";
+            string sqlUp = $"UPDATE TABLE Violations SET Type=@TypeOfViolation , Cost=@Cost where ID='{violation.Person.ID}' and Pelak='{violation.Vehicle.Pelak}' and Time='{violation.ViolationDateTime}';";
 
             SqlCommand command = new SqlCommand(sqlUp, con);
-
+            var Costparam = new SqlParameter("@Cost", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.Input,
+                Value = violation.Cost == null ? DBNull.Value : violation.Cost
+            };
+            var TypeOfViolationparam = new SqlParameter("@TypeOfViolation", SqlDbType.TinyInt)
+            {
+                Direction = ParameterDirection.Input,
+                Value = violation.TypeOfViolation == null ? DBNull.Value : violation.TypeOfViolation.Value
+            };
             con.Open();
+            command.Parameters.Add(Costparam);
+            command.Parameters.Add(TypeOfViolationparam);
             int res =command.ExecuteNonQuery();
             con.Close();
             return res;
@@ -181,9 +275,9 @@ namespace TVIS.Services
             {
                 Result.AddPersons(new Person((string)reader[0])
                 {
-                    FirstName = (string?)reader[1],
-                    LastName = (string?)reader[2],
-                    Image = ByteToImage((Byte[]?)reader[3])
+                    FirstName = Convert.IsDBNull(reader[1]) ? null : (string?)reader[1],
+                    LastName = Convert.IsDBNull(reader[2]) ? null : (string?)reader[2],
+                    Image = ByteToImage(Convert.IsDBNull(reader[3]) ? null : (Byte[]?)reader[3])
                 });
             }
             con.Close();
@@ -202,8 +296,8 @@ namespace TVIS.Services
             {
                 Result.AddVehicles(new Vehicle((string)reader[0])
                 {
-                    YearOfConstruction = (int?)reader[1],
-                    TypeOfVehicle = (VehiclesType?)reader[2]
+                    YearOfConstruction = Convert.IsDBNull(reader[1]) ? null : (short?)reader[1],
+                    TypeOfVehicle = Convert.IsDBNull(reader[2]) ? null : (VehiclesType?)Enum.Parse(typeof(VehiclesType), reader[2].ToString())
                 });
             }
             con.Close();
@@ -222,8 +316,8 @@ namespace TVIS.Services
             {
                 Result.AddViolation(new Violation(new((string)reader[0]), new((string)reader[1]), (DateTime)reader[2])
                 {
-                    TypeOfViolation = (ViolationsType?)reader[3],
-                    Cost = (int?)reader[4]
+                    TypeOfViolation = Convert.IsDBNull(reader[3]) ? null : (ViolationsType ?)Enum.Parse(typeof(ViolationsType), reader[3].ToString()),
+                    Cost = Convert.IsDBNull(reader[4]) ? null : (int?)reader[4]
                 });
             }
             con.Close();
@@ -246,6 +340,23 @@ namespace TVIS.Services
             return Result;
         }
 
+        public int GetSumOfCost()
+        {
+            int Result = 0;
+            string sqlGet = $"SELECT sum(Cost) FROM Violations";
+            SqlCommand command = new SqlCommand(sqlGet, con);
+            con.Open();
+
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Result =  Convert.IsDBNull(reader[0]) ? 0 : (int)reader[0];
+            }
+            con.Close();
+            return Result;
+        }
+
         public Tuple<BitmapImage?,List<PersonsViolation>> GetPersonsViolations(string ID)
         {
             List<PersonsViolation> Result = new();
@@ -259,9 +370,9 @@ namespace TVIS.Services
 
             while (reader.Read())
             {
-                img= ByteToImage((Byte[]?)reader[0]);
+                img= ByteToImage(Convert.IsDBNull(reader[0])?null:(Byte[]?)reader[0]);
             }
-
+            reader.Close();
             sqlGet = "select Violations.Pelak,sum(cost)" +
                 " from Violations," +
                 $"(select Pelak from Violations where ID='{ID}' group by Pelak)" +
@@ -272,7 +383,7 @@ namespace TVIS.Services
 
             while (reader.Read())
             {
-                Result.Add(new PersonsViolation((string)reader[0]) { CostSum = (int)reader[1]});
+                Result.Add(new PersonsViolation((string)reader[0]) { CostSum = Convert.IsDBNull(reader[0]) ? null : (int)reader[1]});
             }
             
             con.Close();
@@ -295,15 +406,15 @@ namespace TVIS.Services
             {
                 Result.Add(new(new((string)reader[0]), new((string)reader[1]), (DateTime)reader[2])
                 {
-                    TypeOfViolation = (ViolationsType?)reader[3],
-                    Cost = (int?)reader[4]
+                    TypeOfViolation = Convert.IsDBNull(reader[3]) ? null : (ViolationsType?)Enum.Parse(typeof(ViolationsType), reader[3].ToString()),
+                    Cost = Convert.IsDBNull(reader[4]) ? null : (int?)reader[4]
                 });
             }
             con.Close();
             return Result;
         }
 
-        public List<VehiclesViolation> GetVehiclesViolationsTime(string Pelak)
+        public List<VehiclesViolation> GetVehiclesViolations(string Pelak)
         {
             List<VehiclesViolation> Result = new();
 
@@ -319,34 +430,24 @@ namespace TVIS.Services
 
             while (reader.Read())
             {
-                Result.Add(new() { FirstName = (string?)reader[0],
-                    LastName = (string?)reader[1],
-                    CostSum= (int?)reader[2]
+                Result.Add(new() { FirstName = Convert.IsDBNull(reader[0])?null: (string?)reader[0],
+                    LastName = Convert.IsDBNull(reader[1]) ? null : (string?)reader[1],
+                    CostSum= Convert.IsDBNull(reader[2]) ? null : (int?)reader[2]
                 });
             }
             con.Close();
             return Result;
         }
 
-
         public static Byte[]? ImageToByte(BitmapImage? imageSource)
         {
             if (imageSource == null) return null;
-            Stream stream = imageSource.StreamSource;
-            Byte[] buffer = null;
-            if (stream != null && stream.Length > 0)
-            {
-                using (BinaryReader br = new BinaryReader(stream))
-                {
-                    buffer = br.ReadBytes((Int32)stream.Length);
-                }
-            }
-            return buffer;
+            return File.ReadAllBytes(imageSource.UriSource.LocalPath);
         }
         public static BitmapImage? ByteToImage(byte[]? array)
         {
             if (array == null) return null;
-            using (var ms = new System.IO.MemoryStream(array))
+            using (var ms = new MemoryStream(array))
             {
                 var image = new BitmapImage();
                 image.BeginInit();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,13 @@ namespace TVIS.Commands
     {
         private readonly DeletetionViewModel deletetionViewModel;
         private readonly TVISModel tvis;
+        private readonly ObservableCollection<ViolationViewModel> _Violations;
 
-        public DeleteViolationCommand(DeletetionViewModel deletetionViewModel, TVISModel tvis)
+        public DeleteViolationCommand(DeletetionViewModel deletetionViewModel, TVISModel tvis, ObservableCollection<ViolationViewModel> _Violations)
         {
             this.deletetionViewModel = deletetionViewModel;
             this.tvis = tvis;
-
+            this._Violations = _Violations;
             deletetionViewModel.PropertyChanged += OnViewModelPropertyChenged;
         }
 
@@ -28,10 +30,12 @@ namespace TVIS.Commands
             string? Time = deletetionViewModel.Violations.ElementAtOrDefault((int)deletetionViewModel.ViolationsIndex).Time;
             string? ID = deletetionViewModel.Violations.ElementAtOrDefault((int)deletetionViewModel.ViolationsIndex).ID;
             tvis.DeleteViolation( ID,Pelak,DateTime.Parse(Time));
+            _Violations.RemoveAt((int)deletetionViewModel.ViolationsIndex);
+            deletetionViewModel.ViolationsIndex = -1;
         }
         public override bool CanExecute(object? parameter)
         {
-            return deletetionViewModel.ViolationsIndex != null && base.CanExecute(parameter);
+            return deletetionViewModel.ViolationsIndex != null && deletetionViewModel.ViolationsIndex != -1 && base.CanExecute(parameter);
         }
         private void OnViewModelPropertyChenged(object? sender, PropertyChangedEventArgs e)
         {

@@ -26,10 +26,10 @@ namespace TVIS.Commands
 
         public override void Execute(object? parameter)
         {
-            int? vehicleyear=null ;
-            if(insertionViewModel.VehicleYear != "")
+            short? vehicleyear=null ;
+            if(!string.IsNullOrEmpty(insertionViewModel.VehicleYear?.Trim()))
             {
-                vehicleyear = Convert.ToInt32(insertionViewModel.VehicleYear);
+                vehicleyear = Convert.ToInt16(insertionViewModel.VehicleYear);
             }
             Vehicle vehicle = new(insertionViewModel.VehiclePelak)
             {
