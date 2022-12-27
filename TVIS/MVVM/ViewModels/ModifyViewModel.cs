@@ -27,11 +27,27 @@ namespace TVIS.MVVM.ViewModels
             set
             {
                 _PersonID = value;
-                OnPropertyChanged(nameof(PersonID));
+                try
+                {
+                    foreach (var v in tvis.GetPersons())
+                    {
+                        if (v.ID == _PersonID)
+                        {
+                            PersonFirstName = v.FirstName;
+                            PersonLastName = v.LastName;
+                            PersonImage = v.Image;
+                            break;
+                        }
+                    }
+                    OnPropertyChanged(nameof(PersonID));
+                }catch
+                {
+
+                }
             }
         }
-        private string _PersonFirstName;
-        public string PersonFirstName
+        private string? _PersonFirstName;
+        public string? PersonFirstName
         {
             get
             {
@@ -43,8 +59,8 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(PersonFirstName));
             }
         }
-        private string _PersonLastName;
-        public string PersonLastName
+        private string? _PersonLastName;
+        public string? PersonLastName
         {
             get
             {
@@ -56,8 +72,8 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(PersonLastName));
             }
         }
-        private BitmapSource _PersonImage;
-        public BitmapSource PersonImage
+        private BitmapImage? _PersonImage;
+        public BitmapImage? PersonImage
         {
             get
             {
@@ -79,7 +95,20 @@ namespace TVIS.MVVM.ViewModels
             set
             {
                 _VehiclePelak = value;
-                OnPropertyChanged(nameof(VehiclePelak));
+                try
+                {
+                    foreach (var v in tvis.GetVehicles())
+                    {
+                        if (v.Pelak == _VehiclePelak)
+                        {
+                            VehicleType = (int)v.TypeOfVehicle.Value;
+                            VehicleYear = v.YearOfConstruction.ToString();
+                            break;
+                        }
+                    }
+                    OnPropertyChanged(nameof(VehiclePelak));
+                }
+                catch { }
             }
         }
         private int _VehicleType;
@@ -95,8 +124,8 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(VehicleType));
             }
         }
-        private string _VehicleYear;
-        public string VehicleYear
+        private string? _VehicleYear;
+        public string? VehicleYear
         {
             get
             {
@@ -118,7 +147,23 @@ namespace TVIS.MVVM.ViewModels
             set
             {
                 _ViolationID = value;
-                OnPropertyChanged(nameof(ViolationID));
+                try
+                {
+                    if (!string.IsNullOrEmpty(_ViolationID) && !string.IsNullOrEmpty(_ViolationPelak))
+                    {
+                        foreach (var v in tvis.GetViolations())
+                        {
+                            if (v.Person.ID == _ViolationID && v.Vehicle.Pelak == _ViolationPelak && v.ViolationDateTime == _ViolationTime)
+                            {
+                                ViolationType = (int)v.TypeOfViolation.Value;
+                                ViolationCost = v.Cost.ToString();
+                                break;
+                            }
+                        }
+                    }
+                    OnPropertyChanged(nameof(ViolationID));
+                }
+                catch { }
             }
         }
         private string _ViolationPelak;
@@ -131,7 +176,23 @@ namespace TVIS.MVVM.ViewModels
             set
             {
                 _ViolationPelak = value;
-                OnPropertyChanged(nameof(ViolationPelak));
+                try
+                {
+                    if (!string.IsNullOrEmpty(_ViolationID) && !string.IsNullOrEmpty(_ViolationPelak))
+                    {
+                        foreach (var v in tvis.GetViolations())
+                        {
+                            if (v.Person.ID == _ViolationID && v.Vehicle.Pelak == _ViolationPelak && v.ViolationDateTime == _ViolationTime)
+                            {
+                                ViolationType = (int)v.TypeOfViolation.Value;
+                                ViolationCost = v.Cost.ToString();
+                                break;
+                            }
+                        }
+                    }
+                    OnPropertyChanged(nameof(ViolationPelak));
+                }
+                catch { }
             }
         }
         private int _ViolationType;
@@ -147,7 +208,7 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(ViolationType));
             }
         }
-        private DateTime _ViolationTime;
+        private DateTime _ViolationTime = DateTime.Now;
         public DateTime ViolationTime
         {
             get
@@ -157,11 +218,27 @@ namespace TVIS.MVVM.ViewModels
             set
             {
                 _ViolationTime = value;
-                OnPropertyChanged(nameof(ViolationTime));
+                try
+                {
+                    if (!string.IsNullOrEmpty(_ViolationID) && !string.IsNullOrEmpty(_ViolationPelak))
+                    {
+                        foreach (var v in tvis.GetViolations())
+                        {
+                            if (v.Person.ID == _ViolationID && v.Vehicle.Pelak == _ViolationPelak && v.ViolationDateTime == _ViolationTime)
+                            {
+                                ViolationType = (int)v.TypeOfViolation.Value;
+                                ViolationCost = v.Cost.ToString();
+                                break;
+                            }
+                        }
+                    }
+                    OnPropertyChanged(nameof(ViolationTime));
+                }
+                catch { }
             }
         }
-        private string _ViolationCost;
-        public string ViolationCost
+        private string? _ViolationCost;
+        public string? ViolationCost
         {
             get
             {
@@ -187,6 +264,7 @@ namespace TVIS.MVVM.ViewModels
             }
         }
         private string _PersonsVehiclePelak;
+
         public string PersonsVehiclePelak
         {
             get
@@ -200,10 +278,15 @@ namespace TVIS.MVVM.ViewModels
             }
         }
 
-
+        private readonly TVISModel tvis;
         public ModifyViewModel(TVISModel tvis)
         {
+            this.tvis = tvis;
             SelectImg = new SelectImgModifyCommand(this);
+            EditPerson = new EditPersonCommand(this, tvis);
+            EditVehicle = new EditVehicleCommand(this, tvis);
+            EditViolation = new EditViolationCommand(this, tvis);
+            EditPersonsVehicle = new EditPersonsVehicleCommand();
         }
 
     }

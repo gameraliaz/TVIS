@@ -147,7 +147,7 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(ViolationType));
             }
         }
-        private DateTime _ViolationTime=new(2022,1,1);
+        private DateTime _ViolationTime=DateTime.Now;
         public DateTime ViolationTime
         {
             get
