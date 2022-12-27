@@ -174,7 +174,7 @@ namespace TVIS.Services
         public int ModifyFromPersons(Person person)
         {
             byte[]? bImage = ImageToByte(person.Image);
-            string sqlUp = $"UPDATE TABLE Persons SET FirstName=@FirstName, LastName=@LastName, Image=@ImageArray where ID='{person.ID}';";
+            string sqlUp = $"UPDATE Persons SET FirstName=@FirstName, LastName=@LastName, Image=@ImageArray where ID='{person.ID}';";
             var byteParam = new SqlParameter();
             if (bImage != null)
             {
@@ -215,7 +215,7 @@ namespace TVIS.Services
         }
         public int ModifyFromVehicles(Vehicle vehicle)
         {
-            string sqlUp = $"UPDATE TABLE Vehicles SET Type=@TypeOfVehicle , ConstractionYear=@YearOfConstraction where Pelak='{vehicle.Pelak}';";
+            string sqlUp = $"UPDATE Vehicles SET Type=@TypeOfVehicle , ConstractionYear=@YearOfConstraction where Pelak='{vehicle.Pelak}';";
             
             SqlCommand command = new SqlCommand(sqlUp, con);
             var YearOfConstractionparam = new SqlParameter("@YearOfConstraction", SqlDbType.SmallInt)
@@ -237,7 +237,7 @@ namespace TVIS.Services
         }
         public int ModifyFromViolations(Violation violation)
         {
-            string sqlUp = $"UPDATE TABLE Violations SET Type=@TypeOfViolation , Cost=@Cost where ID='{violation.Person.ID}' and Pelak='{violation.Vehicle.Pelak}' and Time='{violation.ViolationDateTime}';";
+            string sqlUp = $"UPDATE Violations SET Type=@TypeOfViolation , Cost=@Cost where ID='{violation.Person.ID}' and Pelak='{violation.Vehicle.Pelak}' and Time='{violation.ViolationDateTime}';";
 
             SqlCommand command = new SqlCommand(sqlUp, con);
             var Costparam = new SqlParameter("@Cost", SqlDbType.Int)
