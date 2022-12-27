@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TVIS.MVVM.Models;
+using TVIS.Services;
 using TVIS.Stores;
 
 namespace TVIS.MVVM.ViewModels
@@ -11,6 +12,7 @@ namespace TVIS.MVVM.ViewModels
     public class MainViewModel:ViewModelBase
     {
         private readonly NavigationStore _navigationStore;
+
         public ViewModelBase CurentViewModel => _navigationStore.CurrentViewModel;
 
 

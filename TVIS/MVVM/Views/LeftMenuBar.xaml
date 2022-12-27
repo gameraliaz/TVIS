@@ -378,7 +378,7 @@
                         <materialDesign:PackIcon DockPanel.Dock="Left" Margin="10,5,5,4"  Kind="About" Foreground="#FFFDFA" Width="24" Height="24"
                                          
                                          VerticalAlignment="Center" HorizontalAlignment="Left" Background="Transparent"/>
-                        <TextBlock x:Name="textBlockInf" Padding="0 0 36 0"   Text="About Me" FontSize="24" Foreground="#FFFDFA" 
+                        <TextBlock x:Name="textBlockInf" Padding="0 0 36 0"   Text="About Us" FontSize="24" Foreground="#FFFDFA" 
                            HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Left"/>
 
                     </DockPanel>

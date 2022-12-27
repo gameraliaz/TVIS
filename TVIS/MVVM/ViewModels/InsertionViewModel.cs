@@ -56,8 +56,8 @@ namespace TVIS.MVVM.ViewModels
                 OnPropertyChanged(nameof(PersonLastName));
             }
         }
-        private BitmapSource _PersonImage;
-        public BitmapSource PersonImage
+        private BitmapImage? _PersonImage;
+        public BitmapImage? PersonImage
         {
             get
             {

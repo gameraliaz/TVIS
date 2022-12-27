@@ -26,7 +26,7 @@ namespace TVIS.Commands
 
         public override void Execute(object? parameter)
         {
-            PersonsVehicle personsVehicle = new(new Person(insertionViewModel.ViolationID), new Vehicle(insertionViewModel.ViolationPelak));
+            PersonsVehicle personsVehicle = new(new Person(insertionViewModel.PersonsVehicleID), new Vehicle(insertionViewModel.PersonsVehiclePelak));
             try
             {
                 tvis.MakePersonsVehicle(personsVehicle);

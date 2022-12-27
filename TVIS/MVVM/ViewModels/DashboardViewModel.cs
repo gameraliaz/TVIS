@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using TVIS.Commands;
 using TVIS.MVVM.Models;
+using TVIS.Services;
 
 namespace TVIS.MVVM.ViewModels
 {
@@ -196,8 +197,8 @@ namespace TVIS.MVVM.ViewModels
         public IEnumerable<PersonsViolationViewModel> PersonsViolations => _PersonsViolations;
         private readonly ObservableCollection<ViolationViewModel> _PersonsTimeViolations;
         public IEnumerable<ViolationViewModel> PersonsTimeViolations => _PersonsTimeViolations;
-
         private readonly ObservableCollection<VehiclesViolationViewModel> _VehiclesViolations;
+        private readonly TVISModel tvis;
         public IEnumerable<VehiclesViolationViewModel> VehiclesViolations => _VehiclesViolations;
         public ICommand ShowPersons { get; }
         public ICommand ShowVehicles { get; }
@@ -210,15 +211,7 @@ namespace TVIS.MVVM.ViewModels
 
         public DashboardViewModel(TVISModel tvis)
         {
-            _Persons = new()
-            {
-                new PersonViewModel(new Person("1130570010") { FirstName = "Ali", LastName = "Soleymani" }),
-                new PersonViewModel(new Person("1130570011") { FirstName = "mmd", LastName = "jafari" }),
-                new PersonViewModel(new Person("1130570012") { FirstName = "taghi", LastName = "saleehi" }),
-                new PersonViewModel(new Person("1130570013") { FirstName = "jafar", LastName = "lotfi" }),
-                new PersonViewModel(new Person("1130570014") { FirstName = "sadegh", LastName = "shams" }),
-        };
-
+            _Persons = new();
             _Vehicles = new();
             _Violations = new();
             _PersonsVehicles = new();
@@ -236,6 +229,42 @@ namespace TVIS.MVVM.ViewModels
             ShowPersonViolations= new ShowPersonViolationsCommand(this);
             ShowPersonViolationsDate=new ShowPersonViolationsDateCommand(this);
             ShowVehicleViolations=new ShowVehicleViolationsCommand(this);
+
+            this.tvis = tvis;
+            UpdateView();
+        }
+
+        private void UpdateView()
+        {
+            _Persons.Clear();
+            _Vehicles.Clear();
+            _Violations.Clear();
+            _PersonsVehicles.Clear();
+            _PersonsTimeViolations.Clear();
+            _PersonsViolations.Clear();
+            _VehiclesViolations.Clear();
+
+            foreach(var a in tvis.GetPersons())
+            {
+                PersonViewModel p = new(a);
+                _Persons.Add(p);
+            }
+            foreach (var a in tvis.GetVehicles())
+            {
+                VehicleViewModel v = new(a);
+                _Vehicles.Add(v);
+            }
+            foreach (var a in tvis.GetViolations())
+            {
+                ViolationViewModel v = new(a);
+                _Violations.Add(v);
+            }
+            foreach (var a in tvis.GetPersonsVehicles())
+            {
+                PersonsVehicleViewModel pv = new(a);
+                _PersonsVehicles.Add(pv);
+            }
+            
         }
     }
 }

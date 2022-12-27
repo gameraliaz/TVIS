@@ -30,7 +30,7 @@
                 <TextBlock Text="Ali Soleimani Dorcheh" FontSize="50" Margin="10 50" Foreground="#EFEFFD"/>
             </Border>
         </Grid>
-        <Grid Grid.Row="1" Margin="50">
+        <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
@@ -41,6 +41,24 @@
             <materialDesign:PackIcon x:Name="Github"  MouseDown="PackIcon_MouseDown" Cursor="Hand" Grid.Column="0" Kind="Github" Width="100" Height="100" Foreground="#EFEFFD" Margin="50"/>
             <materialDesign:PackIcon x:Name="Code" MouseDown="PackIcon_MouseDown" Cursor="Hand" Grid.Column="2" Kind="Code" Width="100" Height="100" Foreground="#EFEFFD" Margin="50"/>
             <materialDesign:PackIcon x:Name="Telegram" MouseDown="PackIcon_MouseDown" Cursor="Hand" Grid.Column="4" Kind="send" Width="100" Height="100" Foreground="#EFEFFD" Margin="50"/>
+        </Grid>
+        <Grid Grid.Row="2" Margin="0 50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" CornerRadius="20" Background="#EFEFFD" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                             Kind="person" Foreground="#080812"/>
+                    <TextBlock Text="Programmer : " FontSize="50" Margin="0 50 0 50" Foreground="#080812"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2"  CornerRadius="20" Background="#080812" >
+
+                <TextBlock Text="Soheil Salehi" FontSize="50" Margin="10 50" Foreground="#EFEFFD"/>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

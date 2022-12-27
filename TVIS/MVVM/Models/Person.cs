@@ -9,7 +9,7 @@ namespace TVIS.MVVM.Models
         public string ID { get; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public BitmapSource? Image { get; set; }
+        public BitmapImage? Image { get; set; }
         public Person(string ID)
         {
             this.ID = ID;

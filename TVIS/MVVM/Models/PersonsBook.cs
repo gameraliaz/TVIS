@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using TVIS.Exceptions;
 
 namespace TVIS.MVVM.Models
@@ -38,11 +40,17 @@ namespace TVIS.MVVM.Models
             Persons.Remove(Persons.ElementAt(Persons.IndexOf(Person)));
             AddPersons(Person);
         }
-
-
         public IEnumerable<Person> GetPersons()
         {
             return Persons;
+        }
+        public IEnumerable<PersonsViolation> GetPersonsViolations(string ID)
+        {
+            return new List<PersonsViolation>();
+        }
+        public IEnumerable<PersonsViolation> GetPersonsViolationsTime(string ID,DateTime StartDate,DateTime EndDate)
+        {
+            return new List<PersonsViolation>();
         }
     }
 }

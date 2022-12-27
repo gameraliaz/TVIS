@@ -15,7 +15,7 @@ namespace TVIS.MVVM.ViewModels
         public string? ID => _Person.ID;
         public string? FirstName => _Person.FirstName;
         public string? LastName => _Person.LastName;
-        public BitmapSource? Image => _Person.Image;
+        public BitmapImage? Image => _Person.Image;
         public PersonViewModel(Person person)
         {
             _Person = person;
