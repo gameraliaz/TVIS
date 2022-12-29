@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="TVIS.MVVM.Views.Info"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TVIS.MVVM.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0 50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" CornerRadius="20" Background="#EFEFFD" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                             Kind="person" Foreground="#080812"/>
+                    <TextBlock Text="Programmer : " FontSize="50" Margin="0 50 0 50" Foreground="#080812"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2" CornerRadius="20" Background="#080812" >
+
+                <TextBlock Text="Ali Soleimani Dorcheh" FontSize="50" Margin="10 50" Foreground="#EFEFFD"/>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <materialDesign:PackIcon x:Name="Github"  MouseDown="PackIcon_MouseDown" Cursor="Hand" Grid.Column="0" Kind="Github" Width="100" Height="100" Foreground="#EFEFFD" Margin="50"/>
+            <materialDesign:PackIcon x:Name="Code" MouseDown="PackIcon_MouseDown" Cursor="Hand" Grid.Column="2" Kind="Code" Width="100" Height="100" Foreground="#EFEFFD" Margin="50"/>
+            <materialDesign:PackIcon x:Name="Telegram" MouseDown="PackIcon_MouseDown" Cursor="Hand" Grid.Column="4" Kind="send" Width="100" Height="100" Foreground="#EFEFFD" Margin="50"/>
+        </Grid>
+        <Grid Grid.Row="2" Margin="0 50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" CornerRadius="20" Background="#EFEFFD" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                             Kind="person" Foreground="#080812"/>
+                    <TextBlock Text="Programmer : " FontSize="50" Margin="0 50 0 50" Foreground="#080812"/>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2"  CornerRadius="20" Background="#080812" >
+
+                <TextBlock Text="Soheil Salehi" FontSize="50" Margin="10 50" Foreground="#EFEFFD"/>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
